@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecheck v2.1 — Minecraft Tool Launcher</title>
+    <title>MC v2.1 — Minecraft Tool Launcher</title>
     <meta name="description" content="Minecheck — портативный лаунчер с 10 инструментами для проверки Minecraft. Всё в одном .exe, Python не требуется.">
     <meta name="keywords" content="minecraft, checker, cheat, everything, shellbag, tool, launcher, portable, hero684k">
     <meta name="author" content="hero684k">
@@ -131,6 +131,7 @@
         .btn:active { transform: scale(0.95); transition: transform 0.1s; }
         .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 8px 30px var(--accent-glow); }
         .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(233, 69, 96, 0.5); }
+        .btn-primary.loading { pointer-events: none; opacity: 0.8; }
         .btn-secondary { background: var(--bg-card); color: var(--text-secondary); border: 1px solid var(--border); }
         .btn-secondary:hover { background: var(--bg-hover); border-color: var(--text-muted); transform: translateY(-2px); }
         .btn::after {
@@ -165,19 +166,20 @@
         .tool-name { font-weight: 600; color: var(--text-primary); }
         .tool-desc { font-size: 12px; color: var(--text-muted); }
 
-        /* Tooltip */
-        .tool-card[data-tooltip]:hover::after {
-            content: attr(data-tooltip); position: absolute; bottom: calc(100% + 10px);
-            left: 50%; transform: translateX(-50%); background: var(--bg-hover); color: var(--text-secondary);
-            padding: 8px 14px; border-radius: 6px; font-size: 12px; white-space: nowrap;
-            border: 1px solid var(--border); z-index: 10; pointer-events: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        /* Tooltip с задержкой */
+        .tool-card[data-tooltip]::after {
+            content: attr(data-tooltip);
+            position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+            background: #1e2632; color: var(--text-secondary); padding: 8px 14px;
+            border-radius: 6px; font-size: 12px; white-space: nowrap; z-index: 10;
+            pointer-events: none; border: 1px solid var(--border);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+            opacity: 0; transition: opacity 0.3s ease 0.4s;
         }
+        .tool-card[data-tooltip]:hover::after { opacity: 1; }
 
         /* ===== Screenshot ===== */
-        .screenshot-wrapper {
-            text-align: center; margin-bottom: 60px;
-        }
+        .screenshot-wrapper { text-align: center; margin-bottom: 60px; }
         .screenshot-window {
             display: inline-block; background: var(--bg-card); border: 1px solid var(--border);
             border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
@@ -196,6 +198,14 @@
             width: 100%; display: block; background: var(--bg-primary);
             padding: 20px; color: var(--text-muted); font-size: 14px;
         }
+        .fake-log {
+            text-align: left; font-family: 'Consolas', monospace; font-size: 11px;
+            color: var(--text-muted); margin-top: 15px; padding: 12px;
+            background: rgba(0,0,0,0.3); border-radius: 6px; max-height: 80px; overflow: hidden;
+        }
+        .fake-log .green { color: var(--green); }
+        .fake-log .red { color: var(--accent); }
+        .fake-log .muted { color: var(--text-faded); }
 
         /* ===== Steps ===== */
         .steps { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; margin-bottom: 30px; }
@@ -228,7 +238,7 @@
         }
         .req-badge:hover { border-color: var(--accent); }
 
-        /* ===== FAQ ===== */
+        /* ===== FAQ с анимацией ===== */
         .faq { margin-bottom: 60px; }
         .faq-item {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
@@ -240,11 +250,27 @@
             cursor: pointer; display: flex; justify-content: space-between; align-items: center;
             user-select: none;
         }
-        .faq-question::after { content: '+'; font-size: 20px; color: var(--accent); transition: transform var(--transition); }
-        .faq-item.open .faq-question::after { content: '−'; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height var(--transition); padding: 0 20px; }
+        .faq-icon { font-size: 20px; color: var(--accent); transition: transform 0.3s ease; flex-shrink: 0; }
+        .faq-item.open .faq-icon { transform: rotate(45deg); }
+        .faq-answer {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 20px;
+        }
         .faq-item.open .faq-answer { max-height: 200px; padding: 0 20px 18px; }
         .faq-answer p { color: var(--text-muted); font-size: 14px; }
+
+        /* ===== Share Buttons ===== */
+        .share-buttons {
+            display: flex; gap: 12px; justify-content: center; margin-top: 15px; flex-wrap: wrap;
+        }
+        .share-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--bg-card); color: var(--text-muted); border: 1px solid var(--border);
+            padding: 8px 16px; border-radius: 50px; font-size: 13px;
+            text-decoration: none; cursor: pointer; transition: all var(--transition);
+        }
+        .share-btn:hover { border-color: var(--accent); color: #fff; }
+        .share-btn.copied { border-color: var(--green); color: var(--green); }
 
         /* ===== Footer ===== */
         .footer {
@@ -253,11 +279,6 @@
         }
         .footer a { color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
         .footer a:hover { color: var(--accent); }
-        .share-link {
-            display: inline-block; margin-top: 10px; color: var(--blue); text-decoration: none;
-            font-size: 13px; transition: color var(--transition);
-        }
-        .share-link:hover { color: #fff; }
 
         /* ===== Scrollbar ===== */
         ::-webkit-scrollbar { width: 8px; }
@@ -297,7 +318,7 @@
 
     <!-- Hero Actions -->
     <div class="hero-actions">
-        <a href="https://github.com/hero684k/MineCheck/releases/download/v2.1/MineCheck.zip" class="btn btn-primary" aria-label="Скачать ZIP">
+        <a href="https://github.com/hero684k/MineCheck/releases/download/v2.1/MineCheck.zip" class="btn btn-primary" id="downloadBtn" aria-label="Скачать ZIP">
             📥 Скачать .ZIP
         </a>
         <a href="https://github.com/hero684k/MineCheck" class="btn btn-secondary" aria-label="Открыть GitHub">
@@ -308,9 +329,9 @@
     <!-- Stats -->
     <div class="container">
         <div class="stats">
-            <div class="stat-card"><div class="stat-icon">🛠️</div><div class="stat-value">10</div><div class="stat-label">Инструментов</div></div>
-            <div class="stat-card"><div class="stat-icon">💻</div><div class="stat-value">1</div><div class="stat-label">.exe файл</div></div>
-            <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-value">0</div><div class="stat-label">Python нужен</div></div>
+            <div class="stat-card"><div class="stat-icon">🛠️</div><div class="stat-value" data-target="10">0</div><div class="stat-label">Инструментов</div></div>
+            <div class="stat-card"><div class="stat-icon">💻</div><div class="stat-value" data-target="1">0</div><div class="stat-label">.exe файл</div></div>
+            <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-value" data-target="0">0</div><div class="stat-label">Python нужен</div></div>
         </div>
     </div>
 
@@ -335,19 +356,8 @@
                     <span class="window-title">Minecheck.exe</span>
                 </div>
                 <div class="screenshot-img">
-                    <div style="text-align:center; padding:40px;">
-                        <span style="font-size:48px;">⬡</span>
-                        <h3 style="color:#fff; margin:10px 0;">MINECHECK</h3>
-                        <p style="color:var(--text-muted);">10 инструментов в одном окне</p>
-                        <div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:20px;">
-                            <span style="background:var(--bg-hover); padding:8px 16px; border-radius:6px;">📁 Everything</span>
-                            <span style="background:var(--bg-hover); padding:8px 16px; border-radius:6px;">🛡️ ShellBag</span>
-                            <span style="background:var(--bg-hover); padding:8px 16px; border-radius:6px;">💻 Processes</span>
-                            <span style="background:var(--bg-hover); padding:8px 16px; border-radius:6px;">📂 Recent</span>
-                            <span style="background:var(--bg-hover); padding:8px 16px; border-radius:6px;">🌐 Downloads</span>
-                        </div>
-                        <p style="margin-top:20px; color:var(--green);">✅ Ready</p>
-                    </div>
+                <div class="screenshot-img" style="padding:0;">
+                    <img src="screenshot.png" alt="Minecheck screenshot" style="width:100%; display:block; border-radius:0 0 var(--radius) var(--radius);">
                 </div>
             </div>
         </div>
@@ -375,19 +385,19 @@
         <h2 class="section-title">❓ Частые вопросы</h2>
         <div class="faq">
             <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Это безопасно? Антивирус ругается</div>
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Это безопасно? Антивирус ругается<span class="faq-icon">+</span></div>
                 <div class="faq-answer"><p>Да, безопасно. Утилиты NirSoft и Process Hacker детектятся как RiskTool/HackTool, потому что могут использоваться для анализа системы. Это ложные срабатывания. Добавьте папку в исключения антивируса.</p></div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Нужен ли Python для запуска?</div>
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Нужен ли Python для запуска?<span class="faq-icon">+</span></div>
                 <div class="faq-answer"><p>Нет! Всё упаковано в один .exe файл. Просто запустите Minecheck.exe.</p></div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Работает на Windows 7?</div>
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Работает на Windows 7?<span class="faq-icon">+</span></div>
                 <div class="faq-answer"><p>Рекомендуется Windows 10/11. На Windows 7 некоторые инструменты могут не работать.</p></div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Можно ли добавить свои инструменты?</div>
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Можно ли добавить свои инструменты?<span class="faq-icon">+</span></div>
                 <div class="faq-answer"><p>Да! Проект открыт (MIT License). Скачайте исходный код на GitHub и добавьте свои .exe файлы.</p></div>
             </div>
         </div>
@@ -399,17 +409,25 @@
         <div class="steps">
             <div class="step"><span class="step-num">1</span><span class="step-text">Скачайте ZIP архив</span></div>
             <div class="step"><span class="step-num">2</span><span class="step-text">Распакуйте в любое удобное место</span></div>
-            <div class="step"><span class="step-num">3</span><span class="step-text">Запустите <code onclick="navigator.clipboard.writeText('Minecheck.exe')" title="Нажмите чтобы скопировать">Minecheck.exe</code></span></div>
+            <div class="step"><span class="step-num">3</span><span class="step-text">Запустите <code onclick="navigator.clipboard.writeText('Minecheck.exe');this.textContent='✓ Скопировано!';setTimeout(()=>this.textContent='Minecheck.exe',1500)" title="Нажмите чтобы скопировать">Minecheck.exe</code></span></div>
             <div class="step"><span class="step-num">4</span><span class="step-text">Пользуйтесь!</span></div>
         </div>
         <div class="highlight-box">✅ Python не требуется — всё уже внутри .exe!</div>
+    </div>
+
+    <!-- Share -->
+    <div class="container" style="text-align:center; margin-bottom:60px;">
+        <h2 class="section-title">📤 Поделиться</h2>
+        <div class="share-buttons">
+            <a href="https://discord.com/channels/@me" class="share-btn" target="_blank" rel="noopener">💬 Discord</a>
+            <button class="share-btn" onclick="copyLink()" id="copyLinkBtn">🔗 Копировать ссылку</button>
+        </div>
     </div>
 
     <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2026 <strong>hero684k</strong> &nbsp;|&nbsp; <a href="https://github.com/hero684k/MineCheck">GitHub</a> &nbsp;|&nbsp; MIT License</p>
         <p style="margin-top:5px;font-size:12px;">Minecheck is not affiliated with Mojang or Microsoft.</p>
-        <a href="https://t.me/share/url?url=https://hero684k.github.io/MineCheck&text=Minecheck+v2.1+—+портативный+лаунчер+для+Minecraft" class="share-link">📤 Поделиться в Telegram</a>
     </footer>
 
     <!-- Scripts -->
@@ -417,11 +435,10 @@
         // Плавная загрузка
         document.documentElement.classList.add('loaded');
 
-        // Частицы вместо снега
+        // Частицы
         (function() {
             const container = document.getElementById('particles');
             const symbols = ['◻', '◼', '⬡', '◆', '•', '▸', '▪'];
-            
             function createParticle() {
                 const p = document.createElement('span');
                 p.className = 'particle';
@@ -434,7 +451,6 @@
                 container.appendChild(p);
                 p.addEventListener('animationend', () => p.remove());
             }
-            
             for (let i = 0; i < 35; i++) createParticle();
             setInterval(createParticle, 500);
         })();
@@ -442,10 +458,60 @@
         // Кнопка Наверх
         (function() {
             const btn = document.getElementById('backToTop');
-            window.addEventListener('scroll', () => {
-                btn.classList.toggle('visible', window.scrollY > 350);
+            window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 350));
+        })();
+
+        // Анимация счётчиков
+        (function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counters = entry.target.querySelectorAll('.stat-value[data-target]');
+                        counters.forEach(counter => {
+                            const target = +counter.getAttribute('data-target');
+                            const duration = 1000;
+                            const start = performance.now();
+                            function update(now) {
+                                const elapsed = now - start;
+                                const progress = Math.min(elapsed / duration, 1);
+                                counter.textContent = Math.floor(progress * target);
+                                if (progress < 1) requestAnimationFrame(update);
+                                else counter.textContent = target;
+                            }
+                            requestAnimationFrame(update);
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            document.querySelectorAll('.stats').forEach(el => observer.observe(el));
+        })();
+
+        // Кнопка Скачать — индикатор загрузки
+        (function() {
+            const btn = document.getElementById('downloadBtn');
+            const originalText = btn.innerHTML;
+            btn.addEventListener('click', function() {
+                btn.classList.add('loading');
+                btn.innerHTML = '⏳ Загрузка...';
+                setTimeout(() => {
+                    btn.classList.remove('loading');
+                    btn.innerHTML = originalText;
+                }, 2500);
             });
         })();
+
+        // Копировать ссылку
+        function copyLink() {
+            const btn = document.getElementById('copyLinkBtn');
+            navigator.clipboard.writeText('https://hero684k.github.io/MineCheck');
+            btn.textContent = '✓ Ссылка скопирована!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '🔗 Копировать ссылку';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
     </script>
 
 </body>
