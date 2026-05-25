@@ -8,510 +8,335 @@
     <meta name="keywords" content="minecraft, checker, cheat, everything, shellbag, tool, launcher, portable, hero684k">
     <meta name="author" content="hero684k">
     <meta name="theme-color" content="#e94560">
-    
     <meta property="og:type" content="website">
     <meta property="og:title" content="Minecheck v2.1">
     <meta property="og:description" content="Портативный чекер Minecraft с 10 инструментами">
     <meta property="og:url" content="https://hero684k.github.io/MineCheck">
     <meta property="og:image" content="https://hero684k.github.io/MineCheck/preview.png">
-    
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Minecheck v2.1">
     <meta name="twitter:description" content="Портативный чекер Minecraft с 10 инструментами">
-    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230f1219'/><text x='32' y='48' font-size='40' text-anchor='middle' fill='%23e94560'>⬡</text></svg>">
     <link rel="preconnect" href="https://github.com">
-    
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --bg-primary: #06070a;
-            --bg-secondary: #0f1219;
-            --bg-card: #161b22;
-            --bg-hover: #1c2533;
-            --border: #21262d;
-            --text-primary: #ffffff;
-            --text-secondary: #c9d1d9;
-            --text-muted: #8b949e;
-            --text-faded: #484f58;
-            --accent: #e94560;
-            --accent-hover: #ff5a75;
-            --accent-glow: rgba(233, 69, 96, 0.3);
-            --green: #3fb950;
-            --blue: #58a6ff;
-            --radius: 10px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg-primary:#06070a;--bg-secondary:#0f1219;--bg-card:#161b22;--bg-hover:#1c2533;
+            --border:#21262d;--text-primary:#ffffff;--text-secondary:#c9d1d9;--text-muted:#8b949e;
+            --text-faded:#484f58;--accent:#e94560;--accent-hover:#ff5a75;--accent2:#58a6ff;
+            --accent-glow:rgba(233,69,96,0.4);--green:#3fb950;--radius:10px;--transition:0.3s cubic-bezier(0.4,0,0.2,1);
+            color-scheme:dark;
         }
-
-        html { scroll-behavior: smooth; }
-        body {
-            background: var(--bg-primary);
-            color: var(--text-secondary);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            opacity: 0;
-            transition: opacity 0.6s;
+        html{scroll-behavior:smooth}
+        body{
+            background:var(--bg-primary);color:var(--text-secondary);
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',Roboto,sans-serif;
+            line-height:1.6;min-height:100vh;overflow-x:hidden;
+            -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
         }
-        html.loaded body { opacity: 1; }
-        ::selection { background: var(--accent); color: #fff; }
-
-        /* ===== Particles ===== */
-        .particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1000; }
-        .particle {
-            position: absolute; top: -30px; color: var(--accent); opacity: 0;
-            animation: particleFall linear forwards;
+        body::before{
+            content:'';position:fixed;top:0;left:0;width:100%;height:100%;
+            background:radial-gradient(ellipse at 50% 30%,rgba(233,69,96,0.04) 0%,transparent 70%),
+                       radial-gradient(ellipse at 80% 70%,rgba(88,166,255,0.03) 0%,transparent 60%),
+                       url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events:none;z-index:0;
         }
-        @keyframes particleFall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        ::selection{background:var(--accent);color:#fff}
+
+        .particles-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1000}
+        .particle{position:absolute;top:-30px;color:var(--accent);opacity:0;animation:particleFall linear forwards}
+        @keyframes particleFall{
+            0%{transform:translateY(0) rotate(0deg);opacity:0}
+            10%{opacity:0.7}
+            90%{opacity:0.3}
+            100%{transform:translateY(100vh) rotate(360deg);opacity:0}
         }
 
-        /* ===== Back to Top ===== */
-        .back-to-top {
-            position: fixed; bottom: 25px; right: 25px; z-index: 999;
-            width: 45px; height: 45px; background: var(--accent); color: #fff;
-            border: none; border-radius: 50%; font-size: 20px; cursor: pointer;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.5); opacity: 0;
-            transform: translateY(20px); transition: all var(--transition);
-            pointer-events: none;
+        .back-to-top{
+            position:fixed;bottom:25px;right:25px;z-index:999;width:45px;height:45px;
+            background:var(--accent);color:#fff;border:none;border-radius:50%;font-size:20px;
+            cursor:pointer;box-shadow:0 5px 25px rgba(0,0,0,0.5);opacity:0;
+            transform:translateY(20px);transition:all var(--transition);pointer-events:none;
         }
-        .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-        .back-to-top:hover { background: var(--accent-hover); transform: translateY(-3px); }
-        .back-to-top:active { transform: scale(0.9); }
+        .back-to-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+        .back-to-top:hover{background:var(--accent-hover);transform:translateY(-3px);box-shadow:0 10px 30px var(--accent-glow)}
+        .back-to-top:active{transform:scale(.9)}
 
-        /* ===== Header ===== */
-        .header {
-            background: linear-gradient(180deg, #0f1219 0%, #0a0d14 100%);
-            text-align: center; padding: 80px 20px 60px; position: relative;
-            z-index: 1; border-bottom: 2px solid var(--accent); overflow: hidden;
-        }
-        .header::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(ellipse at 50% 0%, rgba(233,69,96,0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .logo { font-size: 72px; animation: float 3s ease-in-out infinite; position: relative; z-index: 1; }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .title {
-            font-size: clamp(36px, 8vw, 56px); font-weight: 900; color: var(--text-primary);
-            letter-spacing: 4px; position: relative; z-index: 1;
-            background: linear-gradient(135deg, #fff 0%, var(--accent) 50%, #fff 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .subtitle { color: var(--text-muted); font-size: 18px; letter-spacing: 3px; text-transform: uppercase; position: relative; z-index: 1; }
-        .badge {
-            display: inline-block; background: var(--accent); color: #fff; padding: 6px 20px;
-            border-radius: 50px; font-size: 13px; font-weight: 600; letter-spacing: 1px;
-            margin-top: 20px; position: relative; z-index: 1; box-shadow: 0 0 30px var(--accent-glow);
-        }
+        .section-hidden{opacity:0;transform:translateY(30px);transition:all .6s ease}
+        .section-visible{opacity:1;transform:translateY(0)}
 
-        /* ===== Container ===== */
-        .container { max-width: 960px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+        .header{
+            background:rgba(15,18,25,0.8);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);
+            text-align:center;padding:80px 20px 60px;position:relative;z-index:1;
+            border-bottom:2px solid var(--accent);overflow:hidden;
+        }
+        .header::before{
+            content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+            background:radial-gradient(ellipse at 50% 0%,rgba(233,69,96,0.1) 0%,transparent 70%);
+            pointer-events:none;
+        }
+        .logo{font-size:72px;animation:float 3s ease-in-out infinite;position:relative;z-index:1;filter:drop-shadow(0 0 20px var(--accent-glow))}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        .title{
+            font-size:clamp(36px,8vw,56px);font-weight:900;color:var(--text-primary);
+            letter-spacing:4px;position:relative;z-index:1;
+            background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,#fff 100%);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+            text-shadow:none;filter:drop-shadow(0 0 40px var(--accent-glow));
+        }
+        .subtitle{color:var(--text-muted);font-size:18px;letter-spacing:3px;text-transform:uppercase;position:relative;z-index:1}
+        .badge{display:inline-block;background:var(--accent);color:#fff;padding:6px 20px;border-radius:50px;font-size:13px;font-weight:600;letter-spacing:1px;margin-top:20px;position:relative;z-index:1;box-shadow:0 0 30px var(--accent-glow)}
 
-        /* ===== Buttons ===== */
-        .hero-actions {
-            display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
-            margin: -30px 0 60px; position: relative; z-index: 2;
-        }
-        .btn {
-            display: inline-flex; align-items: center; gap: 8px; padding: 16px 36px;
-            font-size: 16px; font-weight: 700; text-decoration: none; border-radius: var(--radius);
-            transition: all var(--transition); position: relative; overflow: hidden;
-        }
-        .btn:active { transform: scale(0.95); transition: transform 0.1s; }
-        .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 8px 30px var(--accent-glow); }
-        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(233, 69, 96, 0.5); }
-        .btn-primary.loading { pointer-events: none; opacity: 0.8; }
-        .btn-secondary { background: var(--bg-card); color: var(--text-secondary); border: 1px solid var(--border); }
-        .btn-secondary:hover { background: var(--bg-hover); border-color: var(--text-muted); transform: translateY(-2px); }
-        .btn::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg); transition: all var(--transition); opacity: 0;
-        }
-        .btn:hover::after { opacity: 1; left: 100%; }
+        .container{max-width:960px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
 
-        /* ===== Stats ===== */
-        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 60px; }
-        .stat-card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-            padding: 25px; text-align: center; transition: all var(--transition);
+        .hero-actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:-30px 0 60px;position:relative;z-index:2}
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:16px 36px;font-size:16px;font-weight:700;text-decoration:none;border-radius:var(--radius);transition:all var(--transition);position:relative;overflow:hidden}
+        .btn:active{transform:scale(.95);transition:transform .1s}
+        .btn-primary{
+            background:linear-gradient(135deg,var(--accent),#ff6b81,var(--accent));
+            background-size:200% 200%;animation:gradientMove 3s ease infinite;
+            color:#fff;box-shadow:0 8px 30px var(--accent-glow);
         }
-        .stat-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .stat-icon { font-size: 28px; margin-bottom: 8px; }
-        .stat-value { font-size: 36px; font-weight: 900; color: var(--accent); }
-        .stat-label { color: var(--text-muted); font-size: 14px; margin-top: 5px; }
+        @keyframes gradientMove{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(233,69,96,0.6)}
+        .btn-primary.loading{pointer-events:none;opacity:.8}
+        .btn-secondary{background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)}
+        .btn-secondary:hover{background:var(--bg-hover);border-color:var(--accent2);transform:translateY(-2px);box-shadow:0 0 20px rgba(88,166,255,0.2)}
+        .btn::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,255,255,0.1),transparent);transform:rotate(45deg);transition:all var(--transition);opacity:0}
+        .btn:hover::after{opacity:1;left:100%}
 
-        /* ===== Tools ===== */
-        .section-title { font-size: 28px; font-weight: 800; color: var(--text-primary); text-align: center; margin-bottom: 30px; }
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 60px; }
-        .tool-card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-            padding: 18px 20px; display: flex; align-items: center; gap: 12px;
-            transition: all var(--transition); cursor: pointer; position: relative;
-        }
-        .tool-card:hover { border-color: var(--accent); transform: translateX(6px); box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
-        .tool-card:active { transform: scale(0.98); }
-        .tool-icon { font-size: 24px; flex-shrink: 0; }
-        .tool-name { font-weight: 600; color: var(--text-primary); }
-        .tool-desc { font-size: 12px; color: var(--text-muted); }
+        .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:60px}
+        .stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:25px;text-align:center;transition:all var(--transition)}
+        .stat-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 0 25px var(--accent-glow),0 10px 30px rgba(0,0,0,0.3)}
+        .stat-icon{font-size:28px;margin-bottom:8px;transition:transform var(--transition)}
+        .stat-card:hover .stat-icon{transform:scale(1.2)}
+        .stat-value{font-size:36px;font-weight:900;color:var(--accent)}
+        .stat-label{color:var(--text-muted);font-size:14px;margin-top:5px}
 
-        /* Tooltip с задержкой */
-        .tool-card[data-tooltip]::after {
-            content: attr(data-tooltip);
-            position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%);
-            background: #1e2632; color: var(--text-secondary); padding: 8px 14px;
-            border-radius: 6px; font-size: 12px; white-space: nowrap; z-index: 10;
-            pointer-events: none; border: 1px solid var(--border);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-            opacity: 0; transition: opacity 0.3s ease 0.4s;
+        .section-title{font-size:28px;font-weight:800;color:var(--text-primary);text-align:center;margin-bottom:30px}
+        .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:60px}
+        .tool-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;display:flex;align-items:center;gap:12px;transition:all var(--transition);cursor:pointer;position:relative}
+        .tool-card:hover{border-color:var(--accent);transform:translateX(6px);box-shadow:0 0 20px var(--accent-glow),0 5px 20px rgba(0,0,0,0.3)}
+        .tool-card:active{transform:scale(.98)}
+        .tool-icon{font-size:24px;flex-shrink:0;transition:transform var(--transition)}
+        .tool-card:hover .tool-icon{transform:scale(1.2)}
+        .tool-name{font-weight:600;color:var(--text-primary)}
+        .tool-desc{font-size:12px;color:var(--text-muted)}
+        .tool-card[data-tooltip]::after{
+            content:attr(data-tooltip);position:absolute;bottom:calc(100% + 10px);left:50%;
+            transform:translateX(-50%);background:#1e2632;color:var(--text-secondary);
+            padding:8px 14px;border-radius:6px;font-size:12px;white-space:nowrap;z-index:10;
+            pointer-events:none;border:1px solid var(--border);
+            box-shadow:0 8px 24px rgba(0,0,0,0.6);opacity:0;transition:opacity .3s ease .4s;
         }
-        .tool-card[data-tooltip]:hover::after { opacity: 1; }
+        .tool-card[data-tooltip]:hover::after{opacity:1}
 
-        /* ===== Screenshot ===== */
-        .screenshot-wrapper { text-align: center; margin-bottom: 60px; }
-        .screenshot-window {
-            display: inline-block; background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            max-width: 100%;
-        }
-        .window-bar {
-            background: var(--bg-secondary); padding: 10px 16px; display: flex; gap: 8px; align-items: center;
-            border-bottom: 1px solid var(--border);
-        }
-        .window-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .window-dot.red { background: #ff5f57; }
-        .window-dot.yellow { background: #febc2e; }
-        .window-dot.green { background: #28c840; }
-        .window-title { color: var(--text-muted); font-size: 12px; margin-left: 8px; flex: 1; }
-        .screenshot-img {
-            width: 100%; display: block; background: var(--bg-primary);
-            padding: 20px; color: var(--text-muted); font-size: 14px;
-        }
-        .fake-log {
-            text-align: left; font-family: 'Consolas', monospace; font-size: 11px;
-            color: var(--text-muted); margin-top: 15px; padding: 12px;
-            background: rgba(0,0,0,0.3); border-radius: 6px; max-height: 80px; overflow: hidden;
-        }
-        .fake-log .green { color: var(--green); }
-        .fake-log .red { color: var(--accent); }
-        .fake-log .muted { color: var(--text-faded); }
+        .screenshot-wrapper{text-align:center;margin-bottom:60px}
+        .screenshot-window{display:inline-block;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:0 0 30px rgba(233,69,96,0.15),0 20px 60px rgba(0,0,0,0.5);max-width:100%;transition:all var(--transition)}
+        .screenshot-window:hover{box-shadow:0 0 50px var(--accent-glow),0 20px 60px rgba(0,0,0,0.5)}
+        .window-bar{background:var(--bg-secondary);padding:10px 16px;display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--border)}
+        .window-dot{width:12px;height:12px;border-radius:50%}
+        .window-dot.red{background:#ff5f57}.window-dot.yellow{background:#febc2e}.window-dot.green{background:#28c840}
+        .window-title{color:var(--text-muted);font-size:12px;margin-left:8px;flex:1}
+        .screenshot-img{padding:0}
+        .screenshot-img img{width:100%;display:block}
 
-        /* ===== Steps ===== */
-        .steps { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; margin-bottom: 30px; }
-        .step { display: flex; align-items: center; gap: 15px; padding: 12px 0; }
-        .step-num {
-            width: 40px; height: 40px; background: var(--accent); color: #fff;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-weight: 800; flex-shrink: 0;
-        }
-        .step-text { font-size: 16px; color: var(--text-secondary); }
-        .step-text code {
-            background: var(--bg-hover); padding: 2px 8px; border-radius: 4px;
-            font-family: 'Consolas', monospace; cursor: pointer; user-select: all;
-        }
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(63,185,80,0.1), transparent);
-            border: 1px solid var(--green); border-radius: var(--radius);
-            padding: 15px 25px; text-align: center; color: var(--green);
-            font-weight: 700; font-size: 18px;
-        }
+        .steps{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:30px;margin-bottom:30px;transition:all var(--transition)}
+        .steps:hover{box-shadow:0 0 20px var(--accent-glow)}
+        .step{display:flex;align-items:center;gap:15px;padding:12px 0}
+        .step-num{width:40px;height:40px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;transition:all var(--transition)}
+        .step:hover .step-num{box-shadow:0 0 20px var(--accent-glow);transform:scale(1.1)}
+        .step-text{font-size:16px;color:var(--text-secondary)}
+        .step-text code{background:var(--bg-hover);padding:2px 8px;border-radius:4px;font-family:'Consolas',monospace;cursor:pointer;user-select:all}
+        .highlight-box{background:linear-gradient(135deg,rgba(63,185,80,0.1),transparent);border:1px solid var(--green);border-radius:var(--radius);padding:15px 25px;text-align:center;color:var(--green);font-weight:700;font-size:18px;transition:all var(--transition)}
+        .highlight-box:hover{box-shadow:0 0 25px rgba(63,185,80,0.2)}
 
-        /* ===== System Requirements ===== */
-        .requirements {
-            display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 60px;
-        }
-        .req-badge {
-            background: var(--bg-card); border: 1px solid var(--border);
-            padding: 10px 22px; border-radius: 50px; font-size: 14px;
-            display: flex; align-items: center; gap: 8px; transition: all var(--transition);
-        }
-        .req-badge:hover { border-color: var(--accent); }
+        .requirements{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;margin-bottom:60px}
+        .req-badge{background:var(--bg-card);border:1px solid var(--border);padding:10px 22px;border-radius:50px;font-size:14px;display:flex;align-items:center;gap:8px;transition:all var(--transition)}
+        .req-badge:hover{border-color:var(--accent);box-shadow:0 0 15px var(--accent-glow)}
 
-        /* ===== FAQ с анимацией ===== */
-        .faq { margin-bottom: 60px; }
-        .faq-item {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-            margin-bottom: 10px; overflow: hidden; transition: all var(--transition);
-        }
-        .faq-item:hover { border-color: var(--text-muted); }
-        .faq-question {
-            padding: 18px 20px; font-weight: 700; color: var(--text-primary);
-            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-            user-select: none;
-        }
-        .faq-icon { font-size: 20px; color: var(--accent); transition: transform 0.3s ease; flex-shrink: 0; }
-        .faq-item.open .faq-icon { transform: rotate(45deg); }
-        .faq-answer {
-            max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease;
-            padding: 0 20px;
-        }
-        .faq-item.open .faq-answer { max-height: 200px; padding: 0 20px 18px; }
-        .faq-answer p { color: var(--text-muted); font-size: 14px; }
+        .faq{margin-bottom:60px}
+        .faq-item{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:all var(--transition)}
+        .faq-item:hover{border-color:var(--accent2);box-shadow:0 0 15px rgba(88,166,255,0.15)}
+        .faq-question{padding:18px 20px;font-weight:700;color:var(--text-primary);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+        .faq-icon{font-size:20px;color:var(--accent);transition:transform .3s ease;flex-shrink:0}
+        .faq-item.open .faq-icon{transform:rotate(45deg)}
+        .faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease;padding:0 20px}
+        .faq-item.open .faq-answer{max-height:200px;padding:0 20px 18px}
+        .faq-answer p{color:var(--text-muted);font-size:14px}
 
-        /* ===== Share Buttons ===== */
-        .share-buttons {
-            display: flex; gap: 12px; justify-content: center; margin-top: 15px; flex-wrap: wrap;
-        }
-        .share-btn {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: var(--bg-card); color: var(--text-muted); border: 1px solid var(--border);
-            padding: 8px 16px; border-radius: 50px; font-size: 13px;
-            text-decoration: none; cursor: pointer; transition: all var(--transition);
-        }
-        .share-btn:hover { border-color: var(--accent); color: #fff; }
-        .share-btn.copied { border-color: var(--green); color: var(--green); }
+        .share-btn{display:inline-block;background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);padding:10px 22px;border-radius:50px;font-size:14px;cursor:pointer;transition:all var(--transition);margin-bottom:50px}
+        .share-btn:hover{border-color:var(--accent2);color:#fff;box-shadow:0 0 20px rgba(88,166,255,0.2)}
+        .share-btn.copied{border-color:var(--green);color:var(--green);box-shadow:0 0 20px rgba(63,185,80,0.3)}
 
-        /* ===== Footer ===== */
-        .footer {
-            border-top: 1px solid var(--border); padding: 30px; text-align: center;
-            color: var(--text-faded); font-size: 14px; position: relative; z-index: 1;
-        }
-        .footer a { color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
-        .footer a:hover { color: var(--accent); }
+        .footer{border-top:1px solid var(--border);padding:30px;text-align:center;color:var(--text-faded);font-size:14px;position:relative;z-index:1}
+        .footer a{color:var(--text-muted);text-decoration:none;transition:color var(--transition)}
+        .footer a:hover{color:var(--accent2)}
 
-        /* ===== Scrollbar ===== */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-primary); }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-faded); }
+        ::-webkit-scrollbar{width:8px}
+        ::-webkit-scrollbar-track{background:var(--bg-primary)}
+        ::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+        ::-webkit-scrollbar-thumb:hover{background:var(--text-faded)}
 
-        /* ===== Responsive ===== */
-        @media (max-width: 768px) {
-            .stats { grid-template-columns: 1fr; }
-            .tools-grid { grid-template-columns: 1fr 1fr; }
-            .hero-actions { flex-direction: column; align-items: center; }
-            .btn { width: 100%; justify-content: center; }
-            .header { padding: 50px 20px 40px; }
-        }
-        @media (max-width: 480px) {
-            .tools-grid { grid-template-columns: 1fr; }
-            .logo { font-size: 48px; }
-        }
+        @media(max-width:768px){.stats{grid-template-columns:1fr}.tools-grid{grid-template-columns:1fr 1fr}.hero-actions{flex-direction:column;align-items:center}.btn{width:100%;justify-content:center}.header{padding:50px 20px 40px}}
+        @media(max-width:480px){.tools-grid{grid-template-columns:1fr}.logo{font-size:48px}}
     </style>
 </head>
 <body>
 
-    <!-- Particles -->
-    <div class="particles-container" id="particles"></div>
+<div class="particles-container" id="particles"></div>
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">↑</button>
 
-    <!-- Back to Top -->
-    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">↑</button>
+<header class="header">
+    <div class="logo">⬡</div>
+    <h1 class="title">MINECHECK</h1>
+    <p class="subtitle">Tool Launcher</p>
+    <span class="badge">v2.1</span>
+</header>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="logo">⬡</div>
-        <h1 class="title">MINECHECK</h1>
-        <p class="subtitle">Tool Launcher</p>
-        <span class="badge">v2.1</span>
-    </header>
+<div class="hero-actions">
+    <a href="https://github.com/hero684k/MineCheck/releases/download/v2.1/MineCheck.zip" class="btn btn-primary" id="downloadBtn">📥 Скачать .ZIP</a>
+    <a href="https://github.com/hero684k/MineCheck" class="btn btn-secondary">⭐ GitHub</a>
+</div>
 
-    <!-- Hero Actions -->
-    <div class="hero-actions">
-        <a href="https://github.com/hero684k/MineCheck/releases/download/v2.1/MineCheck.zip" class="btn btn-primary" id="downloadBtn" aria-label="Скачать ZIP">
-            📥 Скачать .ZIP
-        </a>
-        <a href="https://github.com/hero684k/MineCheck" class="btn btn-secondary" aria-label="Открыть GitHub">
-            ⭐ Смотреть на GitHub
-        </a>
+<div class="container section-hidden">
+    <div class="stats">
+        <div class="stat-card"><div class="stat-icon">🛠️</div><div class="stat-value" data-target="10">0</div><div class="stat-label">Инструментов</div></div>
+        <div class="stat-card"><div class="stat-icon">💻</div><div class="stat-value" data-target="1">0</div><div class="stat-label">.exe файл</div></div>
+        <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-value" data-target="0">0</div><div class="stat-label">Python нужен</div></div>
     </div>
+</div>
 
-    <!-- Stats -->
-    <div class="container">
-        <div class="stats">
-            <div class="stat-card"><div class="stat-icon">🛠️</div><div class="stat-value" data-target="10">0</div><div class="stat-label">Инструментов</div></div>
-            <div class="stat-card"><div class="stat-icon">💻</div><div class="stat-value" data-target="1">0</div><div class="stat-label">.exe файл</div></div>
-            <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-value" data-target="0">0</div><div class="stat-label">Python нужен</div></div>
-        </div>
+<div class="container section-hidden">
+    <div class="requirements">
+        <div class="req-badge">💿 Windows 10/11</div>
+        <div class="req-badge">📦 ~15 MB</div>
+        <div class="req-badge">⚡ Portable</div>
+        <div class="req-badge">🔒 Open Source (MIT)</div>
     </div>
+</div>
 
-    <!-- System Requirements -->
-    <div class="container">
-        <div class="requirements">
-            <div class="req-badge">💿 Windows 10/11</div>
-            <div class="req-badge">📦 ~15 MB</div>
-            <div class="req-badge">⚡ Portable</div>
-            <div class="req-badge">🔒 Open Source (MIT)</div>
-        </div>
-    </div>
-
-    <!-- Screenshot -->
-    <div class="container">
-        <div class="screenshot-wrapper">
-            <div class="screenshot-window">
-                <div class="window-bar">
-                    <span class="window-dot red"></span>
-                    <span class="window-dot yellow"></span>
-                    <span class="window-dot green"></span>
-                    <span class="window-title">Minecheck.exe</span>
-                </div>
-                <div class="screenshot-img">
-                <div class="screenshot-img" style="padding:0;">
-                    <img src="screenshot.png" alt="Minecheck screenshot" style="width:100%; display:block; border-radius:0 0 var(--radius) var(--radius);">
-                </div>
+<div class="container section-hidden">
+    <div class="screenshot-wrapper">
+        <div class="screenshot-window">
+            <div class="window-bar">
+                <span class="window-dot red"></span><span class="window-dot yellow"></span><span class="window-dot green"></span>
+                <span class="window-title">Minecheck.exe</span>
             </div>
+            <div class="screenshot-img"><img src="screenshot.png" alt="Minecheck screenshot"></div>
         </div>
     </div>
+</div>
 
-    <!-- Tools -->
-    <div class="container">
-        <h2 class="section-title">🛠️ Инструменты</h2>
-        <div class="tools-grid">
-            <div class="tool-card" data-tooltip="Мгновенный поиск файлов и папок на ПК"><span class="tool-icon">📁</span><div><div class="tool-name">Everything</div><div class="tool-desc">Поиск файлов</div></div></div>
-            <div class="tool-card" data-tooltip="Анализ ShellBag записей реестра Windows"><span class="tool-icon">🛡️</span><div><div class="tool-name">ShellBag</div><div class="tool-desc">Анализ реестра</div></div></div>
-            <div class="tool-card" data-tooltip="Поиск подозрительных процессов по ключевым словам"><span class="tool-icon">💻</span><div><div class="tool-name">Processes</div><div class="tool-desc">Сканер процессов</div></div></div>
-            <div class="tool-card" data-tooltip="Просмотр недавно открытых файлов Windows"><span class="tool-icon">📂</span><div><div class="tool-name">Recent</div><div class="tool-desc">Недавние файлы</div></div></div>
-            <div class="tool-card" data-tooltip="История загрузок из браузеров (Chrome, Firefox, Edge)"><span class="tool-icon">🌐</span><div><div class="tool-name">Downloads</div><div class="tool-desc">История браузера</div></div></div>
-            <div class="tool-card" data-tooltip="Списки быстрого доступа (Jump Lists) из панели задач"><span class="tool-icon">📌</span><div><div class="tool-name">Jump Lists</div><div class="tool-desc">Быстрый доступ</div></div></div>
-            <div class="tool-card" data-tooltip="Журнал запущенных программ (AmCache)"><span class="tool-icon">⚡</span><div><div class="tool-name">Run History</div><div class="tool-desc">Журнал запусков</div></div></div>
-            <div class="tool-card" data-tooltip="Prefetch-файлы: когда и сколько раз запускалась программа"><span class="tool-icon">⏳</span><div><div class="tool-name">Prefetch</div><div class="tool-desc">История программ</div></div></div>
-            <div class="tool-card" data-tooltip="История подключённых USB-устройств"><span class="tool-icon">🔌</span><div><div class="tool-name">USB History</div><div class="tool-desc">История устройств</div></div></div>
-            <div class="tool-card" data-tooltip="UserAssist: какие программы и когда запускались"><span class="tool-icon">📝</span><div><div class="tool-name">UserAssist</div><div class="tool-desc">Активность программ</div></div></div>
-        </div>
+<div class="container section-hidden">
+    <h2 class="section-title">🛠️ Инструменты</h2>
+    <div class="tools-grid">
+        <div class="tool-card" data-tooltip="Мгновенный поиск файлов и папок на ПК"><span class="tool-icon">📁</span><div><div class="tool-name">Everything</div><div class="tool-desc">Поиск файлов</div></div></div>
+        <div class="tool-card" data-tooltip="Анализ ShellBag записей реестра Windows"><span class="tool-icon">🛡️</span><div><div class="tool-name">ShellBag</div><div class="tool-desc">Анализ реестра</div></div></div>
+        <div class="tool-card" data-tooltip="Поиск подозрительных процессов"><span class="tool-icon">💻</span><div><div class="tool-name">Processes</div><div class="tool-desc">Сканер процессов</div></div></div>
+        <div class="tool-card" data-tooltip="Просмотр недавно открытых файлов"><span class="tool-icon">📂</span><div><div class="tool-name">Recent</div><div class="tool-desc">Недавние файлы</div></div></div>
+        <div class="tool-card" data-tooltip="История загрузок из браузеров"><span class="tool-icon">🌐</span><div><div class="tool-name">Downloads</div><div class="tool-desc">История браузера</div></div></div>
+        <div class="tool-card" data-tooltip="Списки быстрого доступа (Jump Lists)"><span class="tool-icon">📌</span><div><div class="tool-name">Jump Lists</div><div class="tool-desc">Быстрый доступ</div></div></div>
+        <div class="tool-card" data-tooltip="Журнал запущенных программ (AmCache)"><span class="tool-icon">⚡</span><div><div class="tool-name">Run History</div><div class="tool-desc">Журнал запусков</div></div></div>
+        <div class="tool-card" data-tooltip="Prefetch-файлы: когда и сколько раз запускалась программа"><span class="tool-icon">⏳</span><div><div class="tool-name">Prefetch</div><div class="tool-desc">История программ</div></div></div>
+        <div class="tool-card" data-tooltip="История подключённых USB-устройств"><span class="tool-icon">🔌</span><div><div class="tool-name">USB History</div><div class="tool-desc">История устройств</div></div></div>
+        <div class="tool-card" data-tooltip="UserAssist: какие программы и когда запускались"><span class="tool-icon">📝</span><div><div class="tool-name">UserAssist</div><div class="tool-desc">Активность программ</div></div></div>
     </div>
+</div>
 
-    <!-- FAQ -->
-    <div class="container">
-        <h2 class="section-title">❓ Частые вопросы</h2>
-        <div class="faq">
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Это безопасно? Антивирус ругается<span class="faq-icon">+</span></div>
-                <div class="faq-answer"><p>Да, безопасно. Утилиты NirSoft и Process Hacker детектятся как RiskTool/HackTool, потому что могут использоваться для анализа системы. Это ложные срабатывания. Добавьте папку в исключения антивируса.</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Нужен ли Python для запуска?<span class="faq-icon">+</span></div>
-                <div class="faq-answer"><p>Нет! Всё упаковано в один .exe файл. Просто запустите Minecheck.exe.</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Работает на Windows 7?<span class="faq-icon">+</span></div>
-                <div class="faq-answer"><p>Рекомендуется Windows 10/11. На Windows 7 некоторые инструменты могут не работать.</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Можно ли добавить свои инструменты?<span class="faq-icon">+</span></div>
-                <div class="faq-answer"><p>Да! Проект открыт (MIT License). Скачайте исходный код на GitHub и добавьте свои .exe файлы.</p></div>
-            </div>
-        </div>
+<div class="container section-hidden">
+    <h2 class="section-title">❓ Частые вопросы</h2>
+    <div class="faq">
+        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Это безопасно? Антивирус ругается<span class="faq-icon">+</span></div><div class="faq-answer"><p>Да. Утилиты детектятся как RiskTool — это ложные срабатывания. Добавьте папку в исключения.</p></div></div>
+        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Нужен ли Python?<span class="faq-icon">+</span></div><div class="faq-answer"><p>Нет! Всё в одном .exe. Просто запустите Minecheck.exe.</p></div></div>
+        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Работает на Windows 7?<span class="faq-icon">+</span></div><div class="faq-answer"><p>Рекомендуется Windows 10/11. На Windows 7 часть инструментов может не работать.</p></div></div>
+        <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Можно добавить свои инструменты?<span class="faq-icon">+</span></div><div class="faq-answer"><p>Да! Проект открыт (MIT). Скачайте исходный код на GitHub.</p></div></div>
     </div>
+</div>
 
-    <!-- How to -->
-    <div class="container">
-        <h2 class="section-title">🚀 Запуск</h2>
-        <div class="steps">
-            <div class="step"><span class="step-num">1</span><span class="step-text">Скачайте ZIP архив</span></div>
-            <div class="step"><span class="step-num">2</span><span class="step-text">Распакуйте в любое удобное место</span></div>
-            <div class="step"><span class="step-num">3</span><span class="step-text">Запустите <code onclick="navigator.clipboard.writeText('Minecheck.exe');this.textContent='✓ Скопировано!';setTimeout(()=>this.textContent='Minecheck.exe',1500)" title="Нажмите чтобы скопировать">Minecheck.exe</code></span></div>
-            <div class="step"><span class="step-num">4</span><span class="step-text">Пользуйтесь!</span></div>
-        </div>
-        <div class="highlight-box">✅ Python не требуется — всё уже внутри .exe!</div>
+<div class="container section-hidden">
+    <h2 class="section-title">🚀 Запуск</h2>
+    <div class="steps">
+        <div class="step"><span class="step-num">1</span><span class="step-text">Скачайте ZIP архив</span></div>
+        <div class="step"><span class="step-num">2</span><span class="step-text">Распакуйте в любое удобное место</span></div>
+        <div class="step"><span class="step-num">3</span><span class="step-text">Запустите <code onclick="navigator.clipboard.writeText('Minecheck.exe');this.textContent='✓ Скопировано!';setTimeout(()=>this.textContent='Minecheck.exe',1500)" title="Нажмите чтобы скопировать">Minecheck.exe</code></span></div>
+        <div class="step"><span class="step-num">4</span><span class="step-text">Пользуйтесь!</span></div>
     </div>
+    <div class="highlight-box">✅ Python не требуется — всё уже внутри .exe!</div>
+</div>
 
-    <!-- Share -->
-    <div class="container" style="text-align:center; margin-bottom:60px;">
-        <h2 class="section-title">📤 Поделиться</h2>
-        <div class="share-buttons">
-            <button class="share-btn" onclick="copyLink()" id="copyLinkBtn">🔗 Копировать ссылку</button>
-        </div>
-    </div>
+<div class="container section-hidden" style="text-align:center;margin-bottom:60px;">
+    <h2 class="section-title">📤 Поделиться</h2>
+    <button class="share-btn" onclick="copyLink()" id="copyLinkBtn">🔗 Копировать ссылку</button>
+</div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2026 <strong>hero684k</strong> &nbsp;|&nbsp; <a href="https://github.com/hero684k/MineCheck">GitHub</a> &nbsp;|&nbsp; MIT License</p>
-        <p style="margin-top:5px;font-size:12px;">Minecheck is not affiliated with Mojang or Microsoft.</p>
-    </footer>
+<footer class="footer">
+    <p>&copy; 2026 <strong>hero684k</strong> &nbsp;|&nbsp; <a href="https://github.com/hero684k/MineCheck">GitHub</a> &nbsp;|&nbsp; MIT License</p>
+    <p style="margin-top:5px;font-size:12px;">Minecheck is not affiliated with Mojang or Microsoft.</p>
+</footer>
 
-    <!-- Scripts -->
-    <script>
-        // Плавная загрузка
-        document.documentElement.classList.add('loaded');
+<script>
+    document.documentElement.classList.add('loaded');
 
-        // Частицы
-        (function() {
-            const container = document.getElementById('particles');
-            const symbols = ['◻', '◼', '⬡', '◆', '•', '▸', '▪'];
-            function createParticle() {
-                const p = document.createElement('span');
-                p.className = 'particle';
-                p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-                p.style.left = Math.random() * 100 + '%';
-                p.style.fontSize = (Math.random() * 1.5 + 0.4) + 'em';
-                p.style.animationDuration = (Math.random() * 10 + 8) + 's';
-                p.style.animationDelay = Math.random() * 6 + 's';
-                p.style.opacity = Math.random() * 0.4 + 0.1;
-                container.appendChild(p);
-                p.addEventListener('animationend', () => p.remove());
-            }
-            for (let i = 0; i < 35; i++) createParticle();
-            setInterval(createParticle, 500);
-        })();
-
-        // Кнопка Наверх
-        (function() {
-            const btn = document.getElementById('backToTop');
-            window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 350));
-        })();
-
-        // Анимация счётчиков
-        (function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counters = entry.target.querySelectorAll('.stat-value[data-target]');
-                        counters.forEach(counter => {
-                            const target = +counter.getAttribute('data-target');
-                            const duration = 1000;
-                            const start = performance.now();
-                            function update(now) {
-                                const elapsed = now - start;
-                                const progress = Math.min(elapsed / duration, 1);
-                                counter.textContent = Math.floor(progress * target);
-                                if (progress < 1) requestAnimationFrame(update);
-                                else counter.textContent = target;
-                            }
-                            requestAnimationFrame(update);
-                        });
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            document.querySelectorAll('.stats').forEach(el => observer.observe(el));
-        })();
-
-        // Кнопка Скачать — индикатор загрузки
-        (function() {
-            const btn = document.getElementById('downloadBtn');
-            const originalText = btn.innerHTML;
-            btn.addEventListener('click', function() {
-                btn.classList.add('loading');
-                btn.innerHTML = '⏳ Загрузка...';
-                setTimeout(() => {
-                    btn.classList.remove('loading');
-                    btn.innerHTML = originalText;
-                }, 2500);
-            });
-        })();
-
-        // Копировать ссылку
-        function copyLink() {
-            const btn = document.getElementById('copyLinkBtn');
-            navigator.clipboard.writeText('https://hero684k.github.io/MineCheck');
-            btn.textContent = '✓ Ссылка скопирована!';
-            btn.classList.add('copied');
-            setTimeout(() => {
-                btn.textContent = '🔗 Копировать ссылку';
-                btn.classList.remove('copied');
-            }, 2000);
+    // Particles
+    (function(){
+        const c=document.getElementById('particles');
+        const s=['◻','◼','⬡','◆','•','▸','▪'];
+        function p(){
+            const e=document.createElement('span');
+            e.className='particle';e.textContent=s[Math.floor(Math.random()*s.length)];
+            e.style.left=Math.random()*100+'%';
+            e.style.fontSize=(Math.random()*1.5+0.4)+'em';
+            e.style.animationDuration=(Math.random()*10+8)+'s';
+            e.style.opacity=Math.random()*0.4+0.1;
+            c.appendChild(e);e.addEventListener('animationend',()=>e.remove());
         }
-    </script>
+        for(let i=0;i<35;i++)p();setInterval(p,500);
+    })();
 
+    // Parallax particles on mouse move
+    document.addEventListener('mousemove',e=>{
+        const x=(e.clientX/window.innerWidth-0.5)*20;
+        document.querySelectorAll('.particle').forEach(p=>{
+            p.style.marginLeft=x+'px';
+        });
+    });
+
+    // Back to top
+    window.addEventListener('scroll',()=>document.getElementById('backToTop').classList.toggle('visible',window.scrollY>350));
+
+    // Counters animation
+    const observer=new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){
+                entry.target.querySelectorAll('.stat-value[data-target]').forEach(c=>{
+                    const t=+c.getAttribute('data-target'),d=1000,s=performance.now();
+                    function u(n){const e=Math.min((n-s)/d,1);c.textContent=Math.floor(e*t);if(e<1)requestAnimationFrame(u);else c.textContent=t}
+                    requestAnimationFrame(u);
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    },{threshold:0.5});
+    document.querySelectorAll('.stats').forEach(e=>observer.observe(e));
+
+    // Sections reveal on scroll
+    const secObserver=new IntersectionObserver(entries=>{
+        entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('section-visible');secObserver.unobserve(e.target);}});
+    },{threshold:0.15});
+    document.querySelectorAll('.section-hidden').forEach(e=>secObserver.observe(e));
+
+    // Download button
+    const db=document.getElementById('downloadBtn'),ot=db.innerHTML;
+    db.addEventListener('click',function(){db.classList.add('loading');db.innerHTML='⏳ Загрузка...';setTimeout(()=>{db.classList.remove('loading');db.innerHTML=ot;},2500);});
+
+    // Copy link
+    function copyLink(){
+        const b=document.getElementById('copyLinkBtn');
+        navigator.clipboard.writeText('https://hero684k.github.io/MineCheck');
+        b.textContent='✓ Ссылка скопирована!';b.classList.add('copied');
+        setTimeout(()=>{b.textContent='🔗 Копировать ссылку';b.classList.remove('copied');},2000);
+    }
+</script>
 </body>
 </html>
