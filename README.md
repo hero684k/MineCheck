@@ -1,4 +1,4 @@
-# 🔍 MineCheck v2.0
+# 🔍 MineCheck v2.1
 
 Портативный чекер Minecraft. Запусти `Minecheck.exe` и всё.
 
