@@ -11,91 +11,247 @@
             color: #c9d1d9;
             font-family: 'Segoe UI', sans-serif;
             min-height: 100vh;
+            overflow-x: hidden;
+            cursor: default;
         }
+
+        /* Снег */
+        .snowflake {
+            position: fixed;
+            top: -50px;
+            color: #fff;
+            font-size: 1.5em;
+            animation: fall linear infinite;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* Header */
         .header {
-            background: #0f1219;
+            background: linear-gradient(180deg, #0f1219 0%, #0a0d14 100%);
             text-align: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
             border-bottom: 2px solid #e94560;
+            position: relative;
+            z-index: 1;
         }
-        .logo { font-size: 48px; color: #e94560; }
-        .title { font-size: 36px; font-weight: bold; color: #fff; margin: 10px 0; }
-        .subtitle { color: #5a6070; font-size: 16px; }
-        .container { max-width: 800px; margin: 30px auto; padding: 0 20px; }
-        .btn {
+        .logo {
+            font-size: 64px;
+            color: #e94560;
+            animation: pulse 2s infinite;
+            text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #fff;
+            margin: 15px 0;
+            text-shadow: 0 0 30px rgba(233, 69, 96, 0.3);
+            letter-spacing: 3px;
+        }
+        .subtitle {
+            color: #5a6070;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+        .version-badge {
             display: inline-block;
             background: #e94560;
             color: #fff;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin: 10px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-top: 15px;
         }
-        .btn:hover { background: #c0392b; }
+
+        /* Контейнер */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Кнопки */
+        .btn-group {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-download {
+            background: #e94560;
+            color: #fff;
+            box-shadow: 0 0 30px rgba(233, 69, 96, 0.4);
+        }
+        .btn-download:hover {
+            background: #ff5a75;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(233, 69, 96, 0.6);
+        }
+        .btn-github {
+            background: #24292e;
+            color: #fff;
+            border: 1px solid #444;
+        }
+        .btn-github:hover {
+            background: #2f363d;
+            transform: translateY(-3px);
+        }
+
+        /* Инструменты */
+        .section-title {
+            color: #fff;
+            font-size: 24px;
+            margin: 40px 0 20px;
+            text-align: center;
+        }
         .tools {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: 30px 0;
+            gap: 12px;
         }
         .tool {
-            background: #161b22;
-            padding: 12px 16px;
-            border-radius: 5px;
+            background: linear-gradient(135deg, #161b22 0%, #0f1219 100%);
+            padding: 15px 20px;
+            border-radius: 8px;
             border-left: 3px solid #e94560;
+            transition: all 0.3s ease;
+            font-size: 15px;
         }
+        .tool:hover {
+            transform: translateX(5px);
+            border-left-color: #ff5a75;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Инструкция */
+        .steps {
+            background: linear-gradient(135deg, #161b22 0%, #0f1219 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid #1a1f2b;
+        }
+        .steps p {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .no-python {
+            color: #3fb950;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            margin: 20px 0;
+            animation: glow 2s infinite;
+        }
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px #3fb950; }
+            50% { text-shadow: 0 0 30px #3fb950; }
+        }
+
+        /* Footer */
         .footer {
             text-align: center;
             color: #30363d;
-            padding: 20px;
+            padding: 30px;
             border-top: 1px solid #1a1f2b;
-            margin-top: 40px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
         }
+        .footer a { color: #5a6070; text-decoration: none; }
+        .footer a:hover { color: #fff; }
+
         @media (max-width: 600px) {
+            .title { font-size: 30px; }
             .tools { grid-template-columns: 1fr; }
+            .btn { padding: 12px 25px; font-size: 14px; }
         }
     </style>
 </head>
 <body>
+
     <div class="header">
         <div class="logo">⬡</div>
-        <div class="title">MINECHECK v2.1</div>
+        <div class="title">MINECHECK</div>
         <div class="subtitle">Portable Minecraft Tool Launcher</div>
+        <div class="version-badge">v2.1</div>
     </div>
-    
+
     <div class="container">
-        <div style="text-align: center;">
-            <a href="https://github.com/hero684k/MineCheck/archive/refs/heads/main.zip" class="btn">📥 Скачать</a>
-            <a href="https://github.com/hero684k/MineCheck" class="btn">⭐ GitHub</a>
+        <div class="btn-group">
+            <a href="https://github.com/hero684k/MineCheck/releases/download/v2.1/MineCheck.zip" class="btn btn-download">📥 Скачать</a>
+            <a href="https://github.com/hero684k/MineCheck" class="btn btn-github">⭐ GitHub</a>
         </div>
-        
-        <h2 style="color: #fff; margin-top: 30px;">🛠️ 10 инструментов</h2>
+
+        <h2 class="section-title">🛠️ 10 инструментов</h2>
         <div class="tools">
-            <div class="tool">📁 Everything</div>
-            <div class="tool">🛡️ ShellBag Analyzer</div>
-            <div class="tool">💻 Processes</div>
-            <div class="tool">📂 Recent Files</div>
-            <div class="tool">🌐 Downloads</div>
-            <div class="tool">📋 Jump Lists</div>
-            <div class="tool">⚡ Run History</div>
-            <div class="tool">📋 Prefetch</div>
-            <div class="tool">🔌 USB History</div>
-            <div class="tool">📝 UserAssist</div>
+            <div class="tool">📁 Everything — поиск файлов</div>
+            <div class="tool">🛡️ ShellBag — анализ реестра</div>
+            <div class="tool">💻 Processes — сканер процессов</div>
+            <div class="tool">📂 Recent — недавние файлы</div>
+            <div class="tool">🌐 Downloads — история браузера</div>
+            <div class="tool">📋 Jump Lists — быстрый доступ</div>
+            <div class="tool">⚡ Run History — журнал запусков</div>
+            <div class="tool">📋 Prefetch — история программ</div>
+            <div class="tool">🔌 USB History — история USB</div>
+            <div class="tool">📝 UserAssist — активность программ</div>
         </div>
-        
-        <h2 style="color: #fff;">🚀 Запуск</h2>
-        <p style="color: #8b949e; margin: 10px 0;">
-            1. Скачайте ZIP<br>
-            2. Распакуйте в любое место<br>
-            3. Запустите Minecheck.exe<br>
-            4. Готово!
-        </p>
-        <p style="color: #3fb950;">✅ Python не требуется!</p>
+
+        <h2 class="section-title">🚀 Запуск</h2>
+        <div class="steps">
+            <p>1️⃣ Скачайте ZIP архив</p>
+            <p>2️⃣ Распакуйте в любое место</p>
+            <p>3️⃣ Запустите <b>Minecheck.exe</b></p>
+            <p>4️⃣ Готово!</p>
+        </div>
+        <p class="no-python">✅ Python не требуется!</p>
     </div>
-    
+
     <div class="footer">
-        © 2026 hero684k | MIT License
+        © 2026 <b>hero684k</b> | <a href="https://github.com/hero684k/MineCheck">GitHub</a> | MIT License
     </div>
+
+    <!-- Снег -->
+    <script>
+        function createSnow() {
+            const snowflakes = ['❄', '❅', '❆', '✦', '•', '·'];
+            const container = document.body;
+            
+            setInterval(() => {
+                const snow = document.createElement('span');
+                snow.className = 'snowflake';
+                snow.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+                snow.style.left = Math.random() * 100 + '%';
+                snow.style.fontSize = (Math.random() * 1.5 + 0.5) + 'em';
+                snow.style.opacity = Math.random() * 0.7 + 0.3;
+                snow.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                container.appendChild(snow);
+                
+                setTimeout(() => snow.remove(), 10000);
+            }, 200);
+        }
+        createSnow();
+    </script>
 </body>
 </html>
