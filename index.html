@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecheck v3.0</title>
-    <meta name="description" content="Minecheck — портативный лаунчер с 10 инструментами для проверки Minecraft. Всё в одном .exe, Python не требуется.">
-    <meta name="keywords" content="minecraft, checker, cheat, everything, shellbag, tool, launcher, portable, hero684k">
+    <meta name="description" content="Minecheck — портативный лаунчер с 12 инструментами для проверки Minecraft. Всё в одном .exe, Python не требуется.">
+    <meta name="keywords" content="minecraft, checker, cheat, everything, shellbag, tool, launcher, portable, hero684k, auto-scan, system-info">
     <meta name="author" content="hero684k">
     <meta name="theme-color" content="#e94560">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Minecheck v3.0">
-    <meta property="og:description" content="Портативный чекер для Minecraft">
+    <meta property="og:description" content="Портативный чекер для Minecraft с 12 инструментами">
     <meta property="og:url" content="https://hero684k.github.io/MineCheck">
     <meta property="og:image" content="https://hero684k.github.io/MineCheck/preview.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Minecheck v3.0">
-    <meta name="twitter:description" content="Портативный чекер Minecraft с 10 инструментами">
-    <!-- Google tag (gtag.js) -->
+    <meta name="twitter:description" content="Портативный чекер Minecraft с 12 инструментами">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NXS4F61E9C"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -52,6 +51,7 @@
             --accent2: #58a6ff;
             --accent-glow: rgba(233, 69, 96, 0.4);
             --green: #3fb950;
+            --orange: #d2991d;
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
             --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.4);
             --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
@@ -95,6 +95,7 @@
             --accent2: #0d6efd;
             --accent-glow: rgba(233, 69, 96, 0.25);
             --green: #198754;
+            --orange: #b8860b;
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
             --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.08);
             --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.1);
@@ -179,15 +180,12 @@
                 transform: translateY(0) rotate(0deg);
                 opacity: 0
             }
-
             10% {
                 opacity: 0.7
             }
-
             90% {
                 opacity: 0.3
             }
-
             100% {
                 transform: translateY(100vh) rotate(360deg);
                 opacity: 0
@@ -268,15 +266,12 @@
         [data-theme="dark"] .icon-sun {
             display: block
         }
-
         [data-theme="dark"] .icon-moon {
             display: none
         }
-
         [data-theme="light"] .icon-sun {
             display: none
         }
-
         [data-theme="light"] .icon-moon {
             display: block
         }
@@ -330,7 +325,6 @@
             100% {
                 transform: translateY(0)
             }
-
             50% {
                 transform: translateY(-10px)
             }
@@ -374,6 +368,19 @@
             position: relative;
             z-index: 1;
             box-shadow: 0 0 30px var(--accent-glow)
+        }
+
+        .badge-new {
+            display: inline-block;
+            background: var(--orange);
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-left: 6px;
+            vertical-align: middle;
+            letter-spacing: 0.5px;
         }
 
         .container {
@@ -426,7 +433,6 @@
             100% {
                 background-position: 0% 50%
             }
-
             50% {
                 background-position: 100% 50%
             }
@@ -560,6 +566,16 @@
             transform: scale(.98)
         }
 
+        .tool-card.featured {
+            border-color: var(--orange);
+            box-shadow: 0 0 15px rgba(210, 153, 29, 0.2);
+        }
+
+        .tool-card.featured:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-glow), var(--shadow-md);
+        }
+
         .tool-icon {
             font-size: 24px;
             flex-shrink: 0;
@@ -605,7 +621,6 @@
             opacity: 1
         }
 
-        /* Два скриншота рядом */
         .screenshots-duo {
             display: flex;
             flex-wrap: wrap;
@@ -659,11 +674,9 @@
         .window-dot.red {
             background: #ff5f57
         }
-
         .window-dot.yellow {
             background: #febc2e
         }
-
         .window-dot.green {
             background: #28c840
         }
@@ -912,30 +925,24 @@
             .stats {
                 grid-template-columns: 1fr
             }
-
             .tools-grid {
                 grid-template-columns: 1fr 1fr
             }
-
             .hero-actions {
                 flex-direction: column;
                 align-items: center
             }
-
             .btn {
                 width: 100%;
                 justify-content: center
             }
-
             .header {
                 padding: 50px 20px 40px
             }
-
             .theme-toggle {
                 top: 15px;
                 right: 70px
             }
-
             .screenshots-duo {
                 flex-direction: column;
                 align-items: center;
@@ -946,11 +953,9 @@
             .tools-grid {
                 grid-template-columns: 1fr
             }
-
             .logo {
                 font-size: 48px
             }
-
             .theme-toggle {
                 right: 60px;
                 width: 40px;
@@ -986,7 +991,7 @@
         <div class="stats">
             <div class="stat-card">
                 <div class="stat-icon">🛠️</div>
-                <div class="stat-value" data-target="10">0</div>
+                <div class="stat-value" data-target="12">0</div>
                 <div class="stat-label">Инструментов</div>
             </div>
             <div class="stat-card">
@@ -1011,7 +1016,6 @@
         </div>
     </div>
 
-    <!-- Два скриншота рядом -->
     <div class="container section-hidden">
         <h2 class="section-title">🖥️ Скриншоты</h2>
         <div class="screenshots-duo">
@@ -1035,61 +1039,87 @@
     <div class="container section-hidden">
         <h2 class="section-title">🛠️ Инструменты</h2>
         <div class="tools-grid">
-            <div class="tool-card" data-tooltip="Мгновенный поиск файлов и папок на ПК"><span class="tool-icon">📁</span>
+            <!-- НОВЫЙ: Auto-Scan -->
+            <div class="tool-card featured" data-tooltip="Автоматический поиск читов и подозрительных файлов">
+                <span class="tool-icon">🔍</span>
+                <div>
+                    <div class="tool-name">Auto-Scan <span class="badge-new">NEW</span></div>
+                    <div class="tool-desc">Авто-сканер читов</div>
+                </div>
+            </div>
+            <!-- НОВЫЙ: System Info -->
+            <div class="tool-card featured" data-tooltip="Информация о системе: железо, ОС, сеть, версии">
+                <span class="tool-icon">🖥️</span>
+                <div>
+                    <div class="tool-name">System Info <span class="badge-new">NEW</span></div>
+                    <div class="tool-desc">Информация о ПК</div>
+                </div>
+            </div>
+            <div class="tool-card" data-tooltip="Мгновенный поиск файлов и папок на ПК">
+                <span class="tool-icon">📁</span>
                 <div>
                     <div class="tool-name">Everything</div>
                     <div class="tool-desc">Поиск файлов</div>
                 </div>
             </div>
-            <div class="tool-card" data-tooltip="Анализ ShellBag записей реестра Windows"><span class="tool-icon">🛡️</span>
+            <div class="tool-card" data-tooltip="Анализ ShellBag записей реестра Windows">
+                <span class="tool-icon">🛡️</span>
                 <div>
                     <div class="tool-name">ShellBag</div>
                     <div class="tool-desc">Анализ реестра</div>
                 </div>
             </div>
-            <div class="tool-card" data-tooltip="Поиск подозрительных процессов"><span class="tool-icon">💻</span>
+            <div class="tool-card" data-tooltip="Поиск подозрительных процессов">
+                <span class="tool-icon">💻</span>
                 <div>
                     <div class="tool-name">Processes</div>
                     <div class="tool-desc">Сканер процессов</div>
                 </div>
             </div>
-            <div class="tool-card" data-tooltip="Просмотр недавно открытых файлов"><span class="tool-icon">📂</span>
+            <div class="tool-card" data-tooltip="Просмотр недавно открытых файлов">
+                <span class="tool-icon">📂</span>
                 <div>
                     <div class="tool-name">Recent</div>
                     <div class="tool-desc">Недавние файлы</div>
                 </div>
             </div>
-            <div class="tool-card" data-tooltip="История загрузок из браузеров"><span class="tool-icon">🌐</span>
+            <div class="tool-card" data-tooltip="История загрузок из браузеров">
+                <span class="tool-icon">🌐</span>
                 <div>
                     <div class="tool-name">Downloads</div>
                     <div class="tool-desc">История браузера</div>
                 </div>
             </div>
-            <div class="tool-card" data-tooltip="Списки быстрого доступа (Jump Lists)"><span class="tool-icon">📌</span>
+            <div class="tool-card" data-tooltip="Списки быстрого доступа (Jump Lists)">
+                <span class="tool-icon">📌</span>
                 <div>
                     <div class="tool-name">Jump Lists</div>
                     <div class="tool-desc">Быстрый доступ</div>
                 </div>
             </div>
-            <div class="tool-card" data-tooltip="Журнал запущенных программ (AmCache)"><span class="tool-icon">⚡</span>
+            <div class="tool-card" data-tooltip="Журнал запущенных программ (AmCache)">
+                <span class="tool-icon">⚡</span>
                 <div>
                     <div class="tool-name">Run History</div>
                     <div class="tool-desc">Журнал запусков</div>
                 </div>
             </div>
-            <div class="tool-card" data-tooltip="Prefetch-файлы: когда и сколько раз запускалась программа"><span class="tool-icon">⏳</span>
+            <div class="tool-card" data-tooltip="Prefetch-файлы: когда и сколько раз запускалась программа">
+                <span class="tool-icon">⏳</span>
                 <div>
                     <div class="tool-name">Prefetch</div>
                     <div class="tool-desc">История программ</div>
                 </div>
             </div>
-            <div class="tool-card" data-tooltip="История подключённых USB-устройств"><span class="tool-icon">🔌</span>
+            <div class="tool-card" data-tooltip="История подключённых USB-устройств">
+                <span class="tool-icon">🔌</span>
                 <div>
                     <div class="tool-name">USB History</div>
                     <div class="tool-desc">История устройств</div>
                 </div>
             </div>
-            <div class="tool-card" data-tooltip="UserAssist: какие программы и когда запускались"><span class="tool-icon">📝</span>
+            <div class="tool-card" data-tooltip="UserAssist: какие программы и когда запускались">
+                <span class="tool-icon">📝</span>
                 <div>
                     <div class="tool-name">UserAssist</div>
                     <div class="tool-desc">Активность программ</div>
@@ -1108,6 +1138,10 @@
             <div class="faq-item">
                 <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Нужен ли Python?<span class="faq-icon">+</span></div>
                 <div class="faq-answer"><p>Нет! Всё в одном .exe. Просто запустите Minecheck.exe.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Что делает Auto-Scan?<span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Auto-Scan автоматически проверяет ключевые папки, реестр и процессы на наличие читов и выдаёт вердикт: «Чисто» или «Подозрение».</p></div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Работает на Windows 7?<span class="faq-icon">+</span></div>
