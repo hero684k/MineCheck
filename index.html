@@ -124,8 +124,6 @@
         .footer{border-top:1px solid var(--border);padding:30px;text-align:center;color:var(--text-muted);font-size:14px;position:relative;z-index:1;background:var(--footer-bg);transition:all 0.4s ease}
         .footer a{color:var(--text-muted);text-decoration:none;transition:color var(--transition)}
         .footer a:hover{color:var(--accent2)}
-        .download-info{text-align:center;font-size:12px;color:var(--text-muted);margin-top:8px;min-height:18px}
-        .download-info .version-tag{color:var(--accent);font-weight:600}
         ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg-primary)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}::-webkit-scrollbar-thumb:hover{background:var(--text-faded)}
         @media(max-width:768px){.stats{grid-template-columns:1fr}.tools-grid{grid-template-columns:1fr 1fr}.hero-actions{flex-direction:column;align-items:center}.btn{width:100%;justify-content:center}.header{padding:50px 20px 40px}.theme-toggle{top:15px;right:70px}.screenshots-duo{flex-direction:column;align-items:center}}
         @media(max-width:480px){.tools-grid{grid-template-columns:1fr}.logo{font-size:48px}.theme-toggle{right:60px;width:40px;height:40px;font-size:18px}}
@@ -142,11 +140,9 @@
         <span class="badge">v3.0</span>
     </header>
     <div class="hero-actions">
-        <a href="#" class="btn btn-primary" id="downloadBtn">📥 Загрузка...</a>
-        <div class="download-info" id="downloadInfo"></div>
+        <a href="https://github.com/hero684k/MineCheck/releases/latest/download/Minecheck.zip" class="btn btn-primary" id="downloadBtn">📥 Скачать .ZIP</a>
         <a href="https://github.com/hero684k/MineCheck" class="btn btn-secondary">⭐ GitHub</a>
     </div>
-    <!-- ... (остальной контент без изменений) ... -->
     <div class="container section-hidden">
         <div class="stats">
             <div class="stat-card"><div class="stat-icon">🛠️</div><div class="stat-value" data-target="12">0</div><div class="stat-label">Инструментов</div></div>
@@ -154,7 +150,6 @@
             <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-value" data-target="0">0</div><div class="stat-label">Python нужен</div></div>
         </div>
     </div>
-    <!-- Остальной контент страницы остается без изменений -->
     <div class="container section-hidden">
         <div class="requirements">
             <div class="req-badge">💿 Windows 10/11</div>
@@ -216,88 +211,6 @@
         <p style="margin-top:5px;font-size:12px;">Minecheck is not affiliated with Mojang or Microsoft.</p>
     </footer>
     <script>
-        // === НОВЫЙ КОД: Получение последней версии с GitHub ===
-        const GITHUB_API = 'https://api.github.com/repos/hero684k/MineCheck/releases';
-        const downloadBtn = document.getElementById('downloadBtn');
-        const downloadInfo = document.getElementById('downloadInfo');
-        const originalBtnHTML = '📥 Скачать .ZIP';
-        
-        async function fetchLatestRelease() {
-            try {
-                const response = await fetch(GITHUB_API);
-                if (!response.ok) throw new Error('API error');
-                const releases = await response.json();
-                
-                // Фильтруем только релизы (не pre-release, если такие есть)
-                const stableReleases = releases.filter(r => !r.prerelease);
-                const latestRelease = stableReleases.length > 0 ? stableReleases[0] : releases[0];
-                
-                if (!latestRelease) throw new Error('No releases found');
-                
-                // Ищем ZIP архив в assets
-                const zipAsset = latestRelease.assets.find(asset => 
-                    asset.name.endsWith('.zip') && 
-                    asset.content_type === 'application/zip'
-                );
-                
-                if (zipAsset) {
-                    // Устанавливаем ссылку на скачивание
-                    downloadBtn.href = zipAsset.browser_download_url;
-                    downloadBtn.innerHTML = originalBtnHTML;
-                    downloadBtn.classList.remove('loading');
-                    
-                    // Показываем информацию о версии
-                    const version = latestRelease.tag_name;
-                    const sizeMB = (zipAsset.size / (1024 * 1024)).toFixed(1);
-                    downloadInfo.innerHTML = `<span class="version-tag">${version}</span> • ${sizeMB} MB`;
-                    
-                    console.log(`Latest release: ${version} (${sizeMB} MB)`);
-                } else {
-                    // Если ZIP не найден, используем zipball
-                    downloadBtn.href = latestRelease.zipball_url;
-                    downloadBtn.innerHTML = originalBtnHTML;
-                    downloadBtn.classList.remove('loading');
-                    downloadInfo.textContent = `Версия: ${latestRelease.tag_name}`;
-                }
-                
-                // Добавляем обработчик клика для анимации загрузки
-                downloadBtn.addEventListener('click', function(e) {
-                    if (!this.classList.contains('loading')) {
-                        this.classList.add('loading');
-                        this.innerHTML = '⏳ Загрузка...';
-                        setTimeout(() => {
-                            this.classList.remove('loading');
-                            this.innerHTML = originalBtnHTML;
-                        }, 2500);
-                    }
-                });
-                
-            } catch (error) {
-                console.error('Failed to fetch latest release:', error);
-                // Фолбэк на прямую ссылку
-                downloadBtn.href = 'https://github.com/hero684k/MineCheck/releases/latest/download/Minecheck.zip';
-                downloadBtn.innerHTML = originalBtnHTML;
-                downloadBtn.classList.remove('loading');
-                downloadInfo.textContent = 'Нажмите для скачивания последней версии';
-                
-                // Упрощенный обработчик для фолбэка
-                downloadBtn.addEventListener('click', function(e) {
-                    if (!this.classList.contains('loading')) {
-                        this.classList.add('loading');
-                        this.innerHTML = '⏳ Загрузка...';
-                        setTimeout(() => {
-                            this.classList.remove('loading');
-                            this.innerHTML = originalBtnHTML;
-                        }, 2500);
-                    }
-                });
-            }
-        }
-        
-        // Загружаем информацию о последней версии при загрузке страницы
-        fetchLatestRelease();
-
-        // === ОСТАЛЬНОЙ СУЩЕСТВУЮЩИЙ КОД ===
         document.documentElement.classList.add('loaded');
         function toggleTheme(){const html=document.documentElement;const currentTheme=html.getAttribute('data-theme');const newTheme=currentTheme==='dark'?'light':'dark';html.setAttribute('data-theme',newTheme);localStorage.setItem('theme',newTheme);updateFavicon(newTheme)}
         function updateFavicon(theme){const favicon=document.querySelector('link[rel="icon"]');if(theme==='light'){favicon.href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23ffffff'/><text x='32' y='48' font-size='40' text-anchor='middle' fill='%23e94560'>⬡</text></svg>"}else{favicon.href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230f1219'/><text x='32' y='48' font-size='40' text-anchor='middle' fill='%23e94560'>⬡</text></svg>"}}
@@ -307,6 +220,7 @@
         window.addEventListener('scroll',()=>document.getElementById('backToTop').classList.toggle('visible',window.scrollY>350));
         const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.querySelectorAll('.stat-value[data-target]').forEach(c=>{const t=+c.getAttribute('data-target'),d=1000,s=performance.now();function u(n){const e=Math.min((n-s)/d,1);c.textContent=Math.floor(e*t);if(e<1)requestAnimationFrame(u);else c.textContent=t}requestAnimationFrame(u)});observer.unobserve(entry.target)}})},{threshold:0.5});document.querySelectorAll('.stats').forEach(e=>observer.observe(e));
         const secObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('section-visible');secObserver.unobserve(e.target)}})},{threshold:0.15});document.querySelectorAll('.section-hidden').forEach(e=>secObserver.observe(e));
+        const db=document.getElementById('downloadBtn'),ot=db.innerHTML;db.addEventListener('click',function(){db.classList.add('loading');db.innerHTML='⏳ Загрузка...';setTimeout(()=>{db.classList.remove('loading');db.innerHTML=ot},2500)});
         function copyLink(){const b=document.getElementById('copyLinkBtn');navigator.clipboard.writeText('https://hero684k.github.io/MineCheck');b.textContent='✓ Ссылка скопирована!';b.classList.add('copied');setTimeout(()=>{b.textContent='🔗 Копировать ссылку';b.classList.remove('copied')},2000)}
     </script>
 </body>
