@@ -56,7 +56,6 @@
             overflow-x: hidden;
         }
 
-        /* Background gradient */
         body::before {
             content: '';
             position: fixed;
@@ -70,7 +69,6 @@
             z-index: 0;
         }
 
-        /* Gradients */
         .gradient-text {
             background: linear-gradient(90deg, #8b5cf6, #a78bfa, #c4b5fd);
             -webkit-background-clip: text;
@@ -78,20 +76,9 @@
             background-clip: text;
         }
 
-        /* Animations */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes gradientMove {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
 
         @keyframes particleFall {
@@ -101,12 +88,6 @@
             100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
-        @keyframes glowPulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        /* Particles */
         .particles-container {
             position: fixed;
             top: 0;
@@ -124,7 +105,6 @@
             animation: particleFall linear forwards;
         }
 
-        /* Back to top */
         .back-to-top {
             position: fixed;
             bottom: 25px;
@@ -154,7 +134,6 @@
             box-shadow: var(--shadow-glow);
         }
 
-        /* Container */
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -163,7 +142,6 @@
             z-index: 1;
         }
 
-        /* Section animations */
         .section-hidden {
             opacity: 0;
             transform: translateY(30px);
@@ -174,7 +152,6 @@
             transform: translateY(0);
         }
 
-        /* Navbar */
         nav {
             padding: 2rem 0;
             display: flex;
@@ -192,7 +169,6 @@
             gap: 0.5rem;
             letter-spacing: -0.02em;
         }
-        /* Исправление: убираем лишний пробел между Mine и check — теперь слитное написание */
         .logo-text {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
@@ -200,14 +176,15 @@
             background-clip: text;
         }
         .badge-v3 {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
+            background: rgba(139, 92, 246, 0.25);
+            color: #a78bfa;
             font-size: 0.75rem;
             font-weight: 700;
             padding: 0.25rem 0.85rem;
             border-radius: 20px;
             text-transform: uppercase;
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+            box-shadow: none;
+            border: 1px solid rgba(139, 92, 246, 0.4);
         }
         .nav-actions {
             display: flex;
@@ -215,7 +192,6 @@
             gap: 1rem;
         }
 
-        /* Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -236,6 +212,10 @@
             color: white;
             box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
         }
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
@@ -254,7 +234,6 @@
             transform: scale(0.96);
         }
 
-        /* Hero Section */
         .hero {
             text-align: center;
             padding: 4rem 0 5rem;
@@ -295,7 +274,6 @@
             animation: fadeInUp 0.8s ease 0.2s both;
         }
 
-        /* AutoCheck Feature Highlight */
         .feature-highlight {
             background: var(--bg-card);
             border-radius: 28px;
@@ -369,7 +347,6 @@
             }
         }
 
-        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -406,7 +383,6 @@
             }
         }
 
-        /* Section Header */
         .section-header {
             text-align: center;
             margin-bottom: 2rem;
@@ -420,7 +396,6 @@
             color: var(--text-gray);
         }
 
-        /* Tools Grid */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -531,7 +506,30 @@
             display: block;
         }
 
-        /* Steps */
+        /* Indicator dots */
+        .screenshot-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .indicator-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--card-border);
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+        .indicator-dot.active {
+            background: var(--primary);
+            width: 20px;
+            border-radius: 10px;
+        }
+        .indicator-dot:hover {
+            background: var(--secondary);
+        }
+
         .steps-container {
             background: var(--bg-card);
             border-radius: 24px;
@@ -575,7 +573,6 @@
             font-size: 0.9rem;
         }
 
-        /* FAQ */
         .faq-section {
             max-width: 800px;
             margin: 0 auto 4rem;
@@ -623,7 +620,6 @@
             line-height: 1.6;
         }
 
-        /* Share */
         .share-section {
             text-align: center;
             margin-bottom: 3rem;
@@ -649,7 +645,6 @@
             color: #10b981;
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 2.5rem 0;
@@ -666,7 +661,6 @@
             text-decoration: underline;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .container {
                 padding: 0 1rem;
@@ -711,7 +705,6 @@
 <div class="container">
     <nav>
         <div class="logo">
-            <!-- Исправлено: теперь текст без пробела — "Minecheck" слитно -->
             <span class="logo-text">Minecheck</span>
             <span class="badge-v3">v3.0</span>
         </div>
@@ -722,7 +715,6 @@
         </div>
     </nav>
 
-        <!-- Hero -->
         <div class="hero">
             <h1 class="hero-title">
                 <span class="gradient-text">MINECHECK</span>
@@ -734,7 +726,6 @@
             </div>
         </div>
 
-        <!-- AutoCheck V3 Highlight -->
         <div class="feature-highlight section-hidden">
             <div class="feature-content">
                 <span class="feature-tag">⚡ V3 НОВИНКА</span>
@@ -754,7 +745,6 @@
             </div>
         </div>
 
-        <!-- Stats -->
         <div class="stats-grid section-hidden">
             <div class="stat-card">
                 <div class="stat-value" data-target="12">0</div>
@@ -774,7 +764,6 @@
             </div>
         </div>
 
-        <!-- Tools -->
         <div class="section-header section-hidden">
             <h2 class="section-title">Встроенные инструменты</h2>
             <div class="section-subtitle">Все утилиты уже внутри exe-файла</div>
@@ -831,33 +820,19 @@
             </div>
         </div>
 
-        <!-- Screenshots -->
+        <!-- Screenshots - теперь все 6 скриншотов -->
         <div class="section-header section-hidden">
             <h2 class="section-title">Скриншоты</h2>
         </div>
         <div class="screenshot-viewer section-hidden">
             <button id="screenshot-prev" class="screenshot-arrow">‹</button>
-            <div class="screenshots-grid">
-                <div class="screenshot-card active" data-index="0">
-                    <div class="screenshot-preview">
-                        <img src="photos/screenshotG2.png" alt="Screenshot 1">
-                    </div>
-                </div>
-                <div class="screenshot-card" data-index="1">
-                    <div class="screenshot-preview">
-                        <img src="photos/screenshotW3.png" alt="Screenshot 2">
-                    </div>
-                </div>
-                <div class="screenshot-card" data-index="2">
-                    <div class="screenshot-preview">
-                        <img src="photos/screenshotG1.png" alt="Screenshot 3">
-                    </div>
-                </div>
+            <div class="screenshots-grid" id="screenshots-grid">
+                <!-- Скриншоты будут добавлены через JS -->
             </div>
             <button id="screenshot-next" class="screenshot-arrow">›</button>
         </div>
+        <div class="screenshot-indicators" id="screenshot-indicators"></div>
 
-        <!-- Steps -->
         <div class="section-header section-hidden">
             <h2 class="section-title">Как начать</h2>
         </div>
@@ -885,7 +860,6 @@
             </div>
         </div>
 
-        <!-- FAQ -->
         <div class="section-header section-hidden">
             <h2 class="section-title">Частые вопросы</h2>
         </div>
@@ -916,7 +890,6 @@
             </details>
         </div>
 
-        <!-- Share -->
         <div class="share-section section-hidden">
             <button class="share-btn" id="copyLinkBtn">🔗 Поделиться ссылкой</button>
         </div>
@@ -928,6 +901,71 @@
     </footer>
 
     <script>
+        // Все скриншоты из папки photos
+        const screenshotFiles = [
+            'screenshotG1.png',
+            'screenshotG2.png',
+            'screenshotG3.png',
+            'screenshotW1.png',
+            'screenshotW2.png',
+            'screenshotW3.png'
+        ];
+        
+        let currentIndex = 0;
+        let screenshotCards = [];
+        
+        // Создаём скриншоты динамически
+        const screenshotsGrid = document.getElementById('screenshots-grid');
+        const indicatorsContainer = document.getElementById('screenshot-indicators');
+        
+        screenshotFiles.forEach((file, index) => {
+            const card = document.createElement('div');
+            card.className = 'screenshot-card';
+            if (index === 0) card.classList.add('active');
+            card.setAttribute('data-index', index);
+            card.innerHTML = `
+                <div class="screenshot-preview">
+                    <img src="photos/${file}" alt="Screenshot ${index + 1}">
+                </div>
+            `;
+            screenshotsGrid.appendChild(card);
+            
+            // Индикатор
+            const dot = document.createElement('div');
+            dot.className = 'indicator-dot';
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => showScreenshot(index));
+            indicatorsContainer.appendChild(dot);
+        });
+        
+        screenshotCards = document.querySelectorAll('.screenshot-card');
+        const indicatorDots = document.querySelectorAll('.indicator-dot');
+        
+        function showScreenshot(index) {
+            screenshotCards.forEach((card, i) => {
+                card.classList.toggle('active', i === index);
+            });
+            indicatorDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            currentIndex = index;
+        }
+        
+        const prevBtn = document.getElementById('screenshot-prev');
+        const nextBtn = document.getElementById('screenshot-next');
+        
+        prevBtn.addEventListener('click', () => {
+            let newIndex = currentIndex - 1;
+            if (newIndex < 0) newIndex = screenshotCards.length - 1;
+            showScreenshot(newIndex);
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            let newIndex = currentIndex + 1;
+            if (newIndex >= screenshotCards.length) newIndex = 0;
+            showScreenshot(newIndex);
+        });
+
         // Particles
         const particlesContainer = document.getElementById('particles');
         const symbols = ['◻', '◼', '⬡', '◆', '•', '▸', '▪'];
@@ -987,31 +1025,6 @@
             });
         }, { threshold: 0.3 });
         document.querySelectorAll('.stats-grid').forEach(el => statObserver.observe(el));
-
-        // Screenshots slider
-        let currentIndex = 0;
-        const screenshotCards = document.querySelectorAll('.screenshot-card');
-        const prevBtn = document.getElementById('screenshot-prev');
-        const nextBtn = document.getElementById('screenshot-next');
-        
-        function showScreenshot(index) {
-            screenshotCards.forEach((card, i) => {
-                card.classList.toggle('active', i === index);
-            });
-            currentIndex = index;
-        }
-        
-        prevBtn.addEventListener('click', () => {
-            let newIndex = currentIndex - 1;
-            if (newIndex < 0) newIndex = screenshotCards.length - 1;
-            showScreenshot(newIndex);
-        });
-        
-        nextBtn.addEventListener('click', () => {
-            let newIndex = currentIndex + 1;
-            if (newIndex >= screenshotCards.length) newIndex = 0;
-            showScreenshot(newIndex);
-        });
 
         // Download button effect
         const downloadBtn = document.getElementById('downloadBtn');
