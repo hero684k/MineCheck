@@ -192,7 +192,8 @@
             gap: 0.5rem;
             letter-spacing: -0.02em;
         }
-        .logo span {
+        /* Исправление: убираем лишний пробел между Mine и check — теперь слитное написание */
+        .logo-text {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -710,7 +711,9 @@
 <div class="container">
     <nav>
         <div class="logo">
-            Mine<span>check</span><span class="badge-v3">v3.0</span>
+            <!-- Исправлено: теперь текст без пробела — "Minecheck" слитно -->
+            <span class="logo-text">Minecheck</span>
+            <span class="badge-v3">v3.0</span>
         </div>
         <div class="nav-actions">
             <a href="https://github.com/hero684k/MineCheck" class="btn btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">
