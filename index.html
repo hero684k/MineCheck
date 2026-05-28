@@ -220,6 +220,18 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
         }
+        .btn-discord {
+            background: linear-gradient(135deg, #5865F2, #4752c4);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+            color: white;
+            box-shadow: 0 4px 14px rgba(88, 101, 242, 0.4);
+            margin-left: 0.5rem;
+        }
+        .btn-discord:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6);
+        }
         .btn-secondary {
             background-color: var(--bg-card);
             color: var(--text-dark);
@@ -712,6 +724,10 @@
             <a href="https://github.com/hero684k/MineCheck" class="btn btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">
                 GitHub
             </a>
+            <!-- КНОПКА ДИСКОРД В НАВБАРЕ -->
+            <a href="https://discord.gg/udYNBsvy" target="_blank" class="btn btn-discord" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">
+                💬 Discord
+            </a>
         </div>
     </nav>
 
@@ -723,6 +739,8 @@
             <div class="btn-group">
                 <a href="https://github.com/hero684k/MineCheck/releases/latest/download/Minecheck-v3.0.zip" class="btn btn-primary" id="downloadBtn">📥 Скачать .ZIP</a>
                 <a href="https://github.com/hero684k/MineCheck" class="btn btn-secondary">⭐ GitHub</a>
+                <!-- ОСНОВНАЯ КНОПКА ДИСКОРД -->
+                <a href="https://discord.gg/udYNBsvy" target="_blank" class="btn btn-discord">Discord</a>
             </div>
         </div>
 
