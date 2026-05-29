@@ -22,692 +22,109 @@
         gtag('config', 'G-NXS4F61E9C');
     </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #8b5cf6;
-            --primary-dark: #7c3aed;
-            --secondary: #a78bfa;
-            --primary-light: #4c1d95;
-            --text-dark: #f8fafc;
-            --text-gray: #cbd5e1;
-            --text-muted: #94a3b8;
-            --bg-body: #020617;
-            --bg-card: #0f172a;
-            --bg-hover: #1e293b;
-            --card-border: #1f2937;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+            --primary: #8b5cf6; --primary-dark: #7c3aed; --secondary: #a78bfa; --primary-light: #4c1d95;
+            --text-dark: #f8fafc; --text-gray: #cbd5e1; --text-muted: #94a3b8;
+            --bg-body: #020617; --bg-card: #0f172a; --bg-hover: #1e293b; --card-border: #1f2937;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3); --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
             --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
-            --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.3);
-            --radius: 18px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-dark);
-            line-height: 1.5;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at 50% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 70%),
-                        radial-gradient(ellipse at 80% 70%, rgba(79, 70, 229, 0.05) 0%, transparent 60%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, #8b5cf6, #a78bfa, #c4b5fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes particleFall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.2; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .particle {
-            position: absolute;
-            top: -30px;
-            color: var(--primary);
-            opacity: 0;
-            animation: particleFall linear forwards;
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 999;
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: var(--shadow-lg);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all var(--transition);
-            pointer-events: none;
-        }
-        .back-to-top.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        .back-to-top:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .section-hidden {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-        .section-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        nav {
-            padding: 2rem 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .logo {
-            font-weight: 800;
-            font-size: 2.2rem;
-            color: var(--text-dark);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            letter-spacing: -0.02em;
-        }
-        .logo-text {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .badge-v3 {
-            background: rgba(139, 92, 246, 0.25);
-            color: #a78bfa;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.25rem 0.85rem;
-            border-radius: 20px;
-            text-transform: uppercase;
-            box-shadow: none;
-            border: 1px solid rgba(139, 92, 246, 0.4);
-        }
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
-            cursor: pointer;
-            border: none;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            background-size: 200% 200%;
-            animation: gradientMove 3s ease infinite;
-            color: white;
-            box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
-        }
-        @keyframes gradientMove {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
-        }
-        .btn-discord {
-            background: linear-gradient(135deg, #5865F2, #4752c4);
-            background-size: 200% 200%;
-            animation: gradientMove 3s ease infinite;
-            color: white;
-            box-shadow: 0 4px 14px rgba(88, 101, 242, 0.4);
-            margin-left: 0.5rem;
-        }
-        .btn-discord:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6);
-        }
-        .btn-secondary {
-            background-color: var(--bg-card);
-            color: var(--text-dark);
-            border: 1px solid var(--card-border);
-        }
-        .btn-secondary:hover {
-            background-color: var(--bg-hover);
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-        .btn:active {
-            transform: scale(0.96);
-        }
-
-        .hero {
-            text-align: center;
-            padding: 4rem 0 5rem;
-            position: relative;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
-            top: -20%;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        .hero-title {
-            font-size: clamp(4rem, 10vw, 7rem);
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 1rem;
-            letter-spacing: -0.03em;
-            animation: fadeInUp 0.8s ease;
-        }
-        .hero-tagline {
-            font-size: clamp(1.2rem, 2vw, 1.5rem);
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease 0.1s both;
-        }
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
-
-        .feature-highlight {
-            background: var(--bg-card);
-            border-radius: 28px;
-            padding: 2.5rem;
-            margin-bottom: 4rem;
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-            border: 1px solid var(--card-border);
-            box-shadow: var(--shadow-lg);
-            transition: all var(--transition);
-            animation: fadeInUp 0.8s ease 0.15s both;
-        }
-        .feature-highlight:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-glow);
-        }
-        .feature-content {
-            flex: 1;
-        }
-        .feature-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.25rem 0.9rem;
-            border-radius: 20px;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .feature-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            color: var(--text-dark);
-        }
-        .feature-desc {
-            color: var(--text-gray);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-        .feature-icon-large {
-            flex: 0 0 200px;
-            height: 200px;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(79, 70, 229, 0.1));
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
-        }
-        .feature-icon-large img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        @media (max-width: 768px) {
-            .feature-highlight {
-                flex-direction: column-reverse;
-                text-align: center;
-                padding: 2rem;
-            }
-            .feature-icon-large {
-                width: 100%;
-                height: 160px;
-                flex: none;
-            }
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin-bottom: 4rem;
-        }
-        .stat-card {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--card-border);
-            text-align: center;
-            transition: all var(--transition);
-        }
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-glow);
-        }
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 0.25rem;
-        }
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            font-weight: 500;
-        }
-        @media (max-width: 640px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        .section-subtitle {
-            color: var(--text-gray);
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1rem;
-            margin-bottom: 4rem;
-        }
-        .tool-card {
-            background: var(--bg-card);
-            padding: 1.25rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--card-border);
-            transition: all var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            cursor: pointer;
-        }
-        .tool-card:hover {
-            border-color: var(--primary);
-            transform: translateX(5px);
-            box-shadow: var(--shadow-md);
-        }
-        .tool-icon {
-            font-size: 1.8rem;
-            background: rgba(139, 92, 246, 0.1);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 14px;
-            flex-shrink: 0;
-        }
-        .tool-info h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        .tool-info p {
-            font-size: 0.8rem;
-            color: var(--text-gray);
-        }
-        .badge-new {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            font-size: 0.65rem;
-            padding: 0.15rem 0.5rem;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        /* Screenshots */
-        .screenshot-viewer {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 4rem;
-            flex-wrap: wrap;
-        }
-        .screenshot-arrow {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            border: 1px solid var(--card-border);
-            background: var(--bg-card);
-            color: var(--text-dark);
-            cursor: pointer;
-            transition: all var(--transition);
-        }
-        .screenshot-arrow:hover {
-            transform: scale(1.1);
-            border-color: var(--primary);
-            color: var(--primary);
-            box-shadow: var(--shadow-glow);
-        }
-        .screenshots-grid {
-            width: min(100%, 650px);
-        }
-        .screenshot-card {
-            display: none;
-            background: var(--bg-card);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 1rem;
-            box-shadow: var(--shadow-md);
-        }
-        .screenshot-card.active {
-            display: block;
-            animation: fadeInUp 0.4s ease;
-        }
-        .screenshot-preview {
-            background: linear-gradient(180deg, var(--bg-card), var(--bg-body));
-            border-radius: 16px;
-            overflow: hidden;
-        }
-        .screenshot-preview img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Indicator dots */
-        .screenshot-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        .indicator-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--card-border);
-            cursor: pointer;
-            transition: all var(--transition);
-        }
-        .indicator-dot.active {
-            background: var(--primary);
-            width: 20px;
-            border-radius: 10px;
-        }
-        .indicator-dot:hover {
-            background: var(--secondary);
-        }
-
-        .steps-container {
-            background: var(--bg-card);
-            border-radius: 24px;
-            padding: 2rem;
-            border: 1px solid var(--card-border);
-            margin-bottom: 4rem;
-        }
-        .step-item {
-            display: flex;
-            gap: 1.2rem;
-            margin-bottom: 1.5rem;
-            align-items: center;
-        }
-        .step-item:last-child {
-            margin-bottom: 0;
-        }
-        .step-number {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
-            transition: all var(--transition);
-        }
-        .step-item:hover .step-number {
-            transform: scale(1.1);
-            box-shadow: var(--shadow-glow);
-        }
-        .step-text h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-        }
-        .step-text p {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
-
-        .faq-section {
-            max-width: 800px;
-            margin: 0 auto 4rem;
-        }
-        details {
-            background: var(--bg-card);
-            margin-bottom: 0.75rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--card-border);
-            overflow: hidden;
-            transition: all var(--transition);
-        }
-        details:hover {
-            border-color: var(--primary);
-            box-shadow: var(--shadow-sm);
-        }
-        summary {
-            padding: 1rem 1.25rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.2s;
-        }
-        summary:hover {
-            background: var(--bg-hover);
-        }
-        summary::after {
-            content: '+';
-            font-size: 1.3rem;
-            color: var(--primary);
-            font-weight: 300;
-        }
-        details[open] summary::after {
-            content: '−';
-        }
-        details[open] summary {
-            border-bottom: 1px solid var(--card-border);
-        }
-        .faq-content {
-            padding: 0 1.25rem 1rem 1.25rem;
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .share-section {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .share-btn {
-            background: var(--bg-card);
-            color: var(--text-gray);
-            border: 1px solid var(--card-border);
-            padding: 0.75rem 2rem;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all var(--transition);
-        }
-        .share-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-glow);
-        }
-        .share-btn.copied {
-            border-color: #10b981;
-            color: #10b981;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2.5rem 0;
-            border-top: 1px solid var(--card-border);
-            color: var(--text-gray);
-            font-size: 0.85rem;
-        }
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
-            }
-            .hero {
-                padding: 2rem 0 3rem;
-            }
-            .btn-group {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .btn {
-                justify-content: center;
-            }
-            nav {
-                flex-direction: column;
-            }
-            .logo {
-                font-size: 1.8rem;
-            }
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-body);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--card-border);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
-        }
+            --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.3); --radius: 18px; --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg-body); color: var(--text-dark); line-height: 1.5; overflow-x: hidden; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at 50% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 70%), radial-gradient(ellipse at 80% 70%, rgba(79, 70, 229, 0.05) 0%, transparent 60%); pointer-events: none; z-index: 0; }
+        .gradient-text { background: linear-gradient(90deg, #8b5cf6, #a78bfa, #c4b5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes particleFall { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.2; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+        .particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .particle { position: absolute; top: -30px; color: var(--primary); opacity: 0; animation: particleFall linear forwards; }
+        .back-to-top { position: fixed; bottom: 25px; right: 25px; z-index: 999; width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; box-shadow: var(--shadow-lg); opacity: 0; transform: translateY(20px); transition: all var(--transition); pointer-events: none; }
+        .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .back-to-top:hover { transform: translateY(-3px); box-shadow: var(--shadow-glow); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
+        .section-hidden { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .section-visible { opacity: 1; transform: translateY(0); }
+        nav { padding: 2rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-weight: 800; font-size: 2.2rem; color: var(--text-dark); display: flex; align-items: center; gap: 0.5rem; letter-spacing: -0.02em; }
+        .logo-text { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .badge-v3 { background: rgba(139, 92, 246, 0.25); color: #a78bfa; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.85rem; border-radius: 20px; text-transform: uppercase; box-shadow: none; border: 1px solid rgba(139, 92, 246, 0.4); }
+        .nav-actions { display: flex; align-items: center; gap: 1rem; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 0.75rem 1.5rem; border-radius: 12px; font-weight: 600; text-decoration: none; transition: all 0.2s ease; font-size: 0.95rem; cursor: pointer; border: none; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); background-size: 200% 200%; animation: gradientMove 3s ease infinite; color: white; box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4); }
+        @keyframes gradientMove { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6); }
+        .btn-discord { background: linear-gradient(135deg, #5865F2, #4752c4); background-size: 200% 200%; animation: gradientMove 3s ease infinite; color: white; box-shadow: 0 4px 14px rgba(88, 101, 242, 0.4); margin-left: 0.5rem; }
+        .btn-discord:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6); }
+        .btn-secondary { background-color: var(--bg-card); color: var(--text-dark); border: 1px solid var(--card-border); }
+        .btn-secondary:hover { background-color: var(--bg-hover); border-color: var(--primary); transform: translateY(-2px); }
+        .btn:active { transform: scale(0.96); }
+        .hero { text-align: center; padding: 4rem 0 5rem; position: relative; }
+        .hero::before { content: ''; position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%); top: -20%; left: 50%; transform: translateX(-50%); border-radius: 50%; pointer-events: none; }
+        .hero-title { font-size: clamp(4rem, 10vw, 7rem); font-weight: 900; line-height: 1; margin-bottom: 1rem; letter-spacing: -0.03em; animation: fadeInUp 0.8s ease; }
+        .hero-tagline { font-size: clamp(1.2rem, 2vw, 1.5rem); color: var(--text-gray); margin-bottom: 2rem; animation: fadeInUp 0.8s ease 0.1s both; }
+        .btn-group { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; animation: fadeInUp 0.8s ease 0.2s both; }
+        .feature-highlight { background: var(--bg-card); border-radius: 28px; padding: 2.5rem; margin-bottom: 4rem; display: flex; align-items: center; gap: 2.5rem; border: 1px solid var(--card-border); box-shadow: var(--shadow-lg); transition: all var(--transition); animation: fadeInUp 0.8s ease 0.15s both; }
+        .feature-highlight:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: var(--shadow-glow); }
+        .feature-content { flex: 1; }
+        .feature-tag { display: inline-block; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.9rem; border-radius: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .feature-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text-dark); }
+        .feature-desc { color: var(--text-gray); margin-bottom: 1.5rem; line-height: 1.6; }
+        .feature-icon-large { flex: 0 0 200px; height: 200px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(79, 70, 229, 0.1)); border-radius: 24px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: inset 0 0 20px rgba(255,255,255,0.05); }
+        .feature-icon-large img { width: 100%; height: 100%; object-fit: cover; }
+        @media (max-width: 768px) { .feature-highlight { flex-direction: column-reverse; text-align: center; padding: 2rem; } .feature-icon-large { width: 100%; height: 160px; flex: none; } }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 4rem; }
+        .stat-card { background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--card-border); text-align: center; transition: all var(--transition); }
+        .stat-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: var(--shadow-glow); }
+        .stat-value { font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 0.25rem; }
+        .stat-label { font-size: 0.85rem; color: var(--text-gray); font-weight: 500; }
+        @media (max-width: 640px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        .section-header { text-align: center; margin-bottom: 2rem; }
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .section-subtitle { color: var(--text-gray); }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 4rem; }
+        .tool-card { background: var(--bg-card); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--card-border); transition: all var(--transition); display: flex; align-items: center; gap: 1rem; cursor: pointer; }
+        .tool-card:hover { border-color: var(--primary); transform: translateX(5px); box-shadow: var(--shadow-md); }
+        .tool-icon { font-size: 1.8rem; background: rgba(139, 92, 246, 0.1); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 14px; flex-shrink: 0; }
+        .tool-info h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+        .tool-info p { font-size: 0.8rem; color: var(--text-gray); }
+        .badge-new { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 20px; font-weight: 600; }
+        .screenshot-viewer { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 4rem; flex-wrap: wrap; }
+        .screenshot-arrow { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; border: 1px solid var(--card-border); background: var(--bg-card); color: var(--text-dark); cursor: pointer; transition: all var(--transition); }
+        .screenshot-arrow:hover { transform: scale(1.1); border-color: var(--primary); color: var(--primary); box-shadow: var(--shadow-glow); }
+        .screenshots-grid { width: min(100%, 650px); }
+        .screenshot-card { display: none; background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 24px; padding: 1rem; box-shadow: var(--shadow-md); }
+        .screenshot-card.active { display: block; animation: fadeInUp 0.4s ease; }
+        .screenshot-preview { background: linear-gradient(180deg, var(--bg-card), var(--bg-body)); border-radius: 16px; overflow: hidden; }
+        .screenshot-preview img { width: 100%; height: auto; display: block; }
+        .screenshot-indicators { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
+        .indicator-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--card-border); cursor: pointer; transition: all var(--transition); }
+        .indicator-dot.active { background: var(--primary); width: 20px; border-radius: 10px; }
+        .indicator-dot:hover { background: var(--secondary); }
+        .steps-container { background: var(--bg-card); border-radius: 24px; padding: 2rem; border: 1px solid var(--card-border); margin-bottom: 4rem; }
+        .step-item { display: flex; gap: 1.2rem; margin-bottom: 1.5rem; align-items: center; }
+        .step-item:last-child { margin-bottom: 0; }
+        .step-number { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; transition: all var(--transition); }
+        .step-item:hover .step-number { transform: scale(1.1); box-shadow: var(--shadow-glow); }
+        .step-text h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; }
+        .step-text p { color: var(--text-gray); font-size: 0.9rem; }
+        .faq-section { max-width: 800px; margin: 0 auto 4rem; }
+        details { background: var(--bg-card); margin-bottom: 0.75rem; border-radius: var(--radius); border: 1px solid var(--card-border); overflow: hidden; transition: all var(--transition); }
+        details:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); }
+        summary { padding: 1rem 1.25rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
+        summary:hover { background: var(--bg-hover); }
+        summary::after { content: '+'; font-size: 1.3rem; color: var(--primary); font-weight: 300; }
+        details[open] summary::after { content: '−'; }
+        details[open] summary { border-bottom: 1px solid var(--card-border); }
+        .faq-content { padding: 0 1.25rem 1rem 1.25rem; color: var(--text-gray); font-size: 0.9rem; line-height: 1.6; }
+        .share-section { text-align: center; margin-bottom: 3rem; }
+        .share-btn { background: var(--bg-card); color: var(--text-gray); border: 1px solid var(--card-border); padding: 0.75rem 2rem; border-radius: 40px; font-size: 0.9rem; cursor: pointer; transition: all var(--transition); }
+        .share-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow-glow); }
+        .share-btn.copied { border-color: #10b981; color: #10b981; }
+        footer { text-align: center; padding: 2.5rem 0; border-top: 1px solid var(--card-border); color: var(--text-gray); font-size: 0.85rem; }
+        footer a { color: var(--primary); text-decoration: none; font-weight: 500; }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 768px) { .container { padding: 0 1rem; } .hero { padding: 2rem 0 3rem; } .btn-group { flex-direction: column; align-items: stretch; } .btn { justify-content: center; } nav { flex-direction: column; } .logo { font-size: 1.8rem; } }
+        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: var(--bg-body); } ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; } ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
     </style>
 </head>
 <body>
@@ -716,358 +133,128 @@
 
 <div class="container">
     <nav>
-        <div class="logo">
-            <span class="logo-text">Minecheck</span>
-            <span class="badge-v3">v3.1</span>
-        </div>
+        <div class="logo"><span class="logo-text">Minecheck</span><span class="badge-v3">v3.1</span></div>
         <div class="nav-actions">
-            <a href="https://github.com/hero684k/MineCheck" class="btn btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">
-                GitHub
-            </a>
-            <!-- КНОПКА ДИСКОРД В НАВБАРЕ -->
-            <a href="https://discord.gg/udYNBsvy" target="_blank" class="btn btn-discord" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">
-                💬 Discord
-            </a>
+            <a href="https://github.com/hero684k/MineCheck" class="btn btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">GitHub</a>
+            <a href="https://discord.gg/udYNBsvy" target="_blank" class="btn btn-discord" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">💬 Discord</a>
         </div>
     </nav>
 
-        <div class="hero">
-            <h1 class="hero-title">
-                <span class="gradient-text">MINECHECK</span>
-            </h1>
-            <div class="hero-tagline">Портативный чекер Minecraft</div>
-            <div class="btn-group">
-                <a href="https://github.com/hero684k/MineCheck/releases/latest/download/Minecheck-v3.1.zip" class="btn btn-primary" id="downloadBtn">📥 Скачать .ZIP</a>
-                <a href="https://github.com/hero684k/MineCheck" class="btn btn-secondary">⭐ GitHub</a>
-                <!-- ОСНОВНАЯ КНОПКА ДИСКОРД -->
-                <a href="https://discord.gg/udYNBsvy" target="_blank" class="btn btn-discord">Discord</a>
-            </div>
-        </div>
-
-        <div class="feature-highlight section-hidden">
-            <div class="feature-content">
-                <span class="feature-tag">⚡ V3 НОВИНКА</span>
-                <h2 class="feature-title">AutoCheck: Умная автоматическая проверка</h2>
-                <p class="feature-desc">
-                    Эта функция сама проверит ключевые папки, проанализирует реестр и процессы,
-                    найдёт подозрительные файлы и признаки читов — и вынесет чёткий вердикт:
-                    <strong>«Чисто»</strong> или <strong>«Подозрение»</strong>.
-                    Не нужно ничего запускать вручную — просто нажмите одну кнопку.
-                </p>
-                <a href="#" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;">
-                    Запустить AutoCheck →
-                </a>
-            </div>
-            <div class="feature-icon-large">
-                <img src="photos/AutoCheck.png" alt="AutoCheck preview">
-            </div>
-        </div>
-
-        <div class="stats-grid section-hidden">
-            <div class="stat-card">
-                <div class="stat-value" data-target="12">0</div>
-                <div class="stat-label">Инструментов</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" data-target="1">0</div>
-                <div class="stat-label">.exe файл</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" data-target="0">0</div>
-                <div class="stat-label">Зависимостей</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">Portable</div>
-                <div class="stat-label">Режим работы</div>
-            </div>
-        </div>
-
-        <div class="section-header section-hidden">
-            <h2 class="section-title">Встроенные инструменты</h2>
-            <div class="section-subtitle">Все утилиты уже внутри exe-файла</div>
-        </div>
-
-        <div class="tools-grid section-hidden">
-            <div class="tool-card">
-                <div class="tool-icon">🔍</div>
-                <div class="tool-info"><h3>Auto-Scan <span class="badge-new">NEW</span></h3><p>Авто-сканер читов</p></div>
-            </div>
-            <div class="tool-card">
-                <div class="tool-icon">🖥️</div>
-                <div class="tool-info"><h3>System Info <span class="badge-new">NEW</span></h3><p>Информация о ПК</p></div>
-            </div>
-            <div class="tool-card">
-                <div class="tool-icon">📁</div>
-                <div class="tool-info"><h3>Everything</h3><p>Мгновенный поиск файлов</p></div>
-            </div>
-            <div class="tool-card">
-                <div class="tool-icon">🛡️</div>
-                <div class="tool-info"><h3>ShellBag</h3><p>Анализ реестра</p></div>
-            </div>
-            <div class="tool-card">
-                <div class="tool-icon">⏳</div>
-                <div class="tool-info"><h3>Prefetch</h3><p>История запуска программ</p></div>
-            </div>
-            <div class="tool-card">
-                <div class="tool-icon">📃</div>
-                <div class="tool-info"><h3>Recent Files</h3><p>Недавние документы</p></div>
-            </div>
-            <div class="tool-card">
-                <div class="tool-icon">🌐</div>
-                <div class="tool-info"><h3>Downloads</h3><p>История загрузок</p></div>
-            </div>
-            <div class="tool-card">
-                <div class="tool-icon">📌</div>
-                <div class="tool-info"><h3>Jump Lists</h3><p>Быстрый доступ</p></div>
-            </div>
-            <div class="tool-card">
-                <div class="tool-icon">⚡</div>
-                <div class="tool-info"><h3>Run History</h3><p>Журнал команд Win+R</p></div>
-            </div>
-             <div class="tool-card">
-                <div class="tool-icon">💻</div>
-                <div class="tool-info"><h3>Processes</h3><p>Сканер процессов</p></div>
-            </div>
-            <div class="tool-card">
-                <div class="tool-icon">🔌</div>
-                <div class="tool-info"><h3>USB History</h3><p>Логи USB-устройств</p></div>
-            </div>
-            <div class="tool-card">
-                <div class="tool-icon">📝</div>
-                <div class="tool-info"><h3>UserAssist</h3><p>Статистика использования</p></div>
-            </div>
-        </div>
-
-        <!-- Screenshots - теперь все 6 скриншотов -->
-        <div class="section-header section-hidden">
-            <h2 class="section-title">Скриншоты</h2>
-        </div>
-        <div class="screenshot-viewer section-hidden">
-            <button id="screenshot-prev" class="screenshot-arrow">‹</button>
-            <div class="screenshots-grid" id="screenshots-grid">
-                <!-- Скриншоты будут добавлены через JS -->
-            </div>
-            <button id="screenshot-next" class="screenshot-arrow">›</button>
-        </div>
-        <div class="screenshot-indicators" id="screenshot-indicators"></div>
-
-        <div class="section-header section-hidden">
-            <h2 class="section-title">Как начать</h2>
-        </div>
-        <div class="steps-container section-hidden">
-            <div class="step-item">
-                <div class="step-number">1</div>
-                <div class="step-text">
-                    <h4>Скачайте архив</h4>
-                    <p>Загрузите последнюю версию .ZIP файла</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-number">2</div>
-                <div class="step-text">
-                    <h4>Распакуйте</h4>
-                    <p>Извлеките файлы в любую удобную папку</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <div class="step-number">3</div>
-                <div class="step-text">
-                    <h4>Запустите Minecheck.exe</h4>
-                    <p>Откройте программу и используйте AutoCheck или любой инструмент</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-header section-hidden">
-            <h2 class="section-title">Частые вопросы</h2>
-        </div>
-        <div class="faq-section section-hidden">
-            <details open>
-                <summary>Это безопасно? Антивирус может ругаться</summary>
-                <div class="faq-content">
-                    Да, это безопасно. Утилиты могут детектироваться как RiskTool из-за своего функционала (доступ к реестру и процессам). Это ложное срабатывание. Просто добавьте папку с программой в исключения антивируса.
-                </div>
-            </details>
-            <details>
-                <summary>Нужен ли Python или другие библиотеки?</summary>
-                <div class="faq-content">
-                    Нет! Проект собран в один standalone .exe файл. Вам не нужно ничего устанавливать. Просто распакуйте архив и запустите.
-                </div>
-            </details>
-            <details>
-                <summary>Работает ли на Windows 7?</summary>
-                <div class="faq-content">
-                    Мы рекомендуем Windows 10 или 11 для полной совместимости. На Windows 7 некоторые функции могут работать некорректно.
-                </div>
-            </details>
-            <details>
-                <summary>Как добавить свои инструменты?</summary>
-                <div class="faq-content">
-                    Проект открыт под лицензией MIT. Вы можете скачать исходный код на GitHub и модифицировать его под свои нужды.
-                </div>
-            </details>
-        </div>
-
-        <div class="share-section section-hidden">
-            <button class="share-btn" id="copyLinkBtn">🔗 Поделиться ссылкой</button>
+    <div class="hero">
+        <h1 class="hero-title"><span class="gradient-text">MINECHECK</span></h1>
+        <div class="hero-tagline">Портативный чекер Minecraft</div>
+        <div class="btn-group">
+            <a href="https://github.com/hero684k/MineCheck/releases/latest/download/Minecheck-v3.1.zip" class="btn btn-primary" id="downloadBtn">📥 Скачать .ZIP</a>
+            <a href="https://github.com/hero684k/MineCheck" class="btn btn-secondary">⭐ GitHub</a>
+            <a href="https://discord.gg/udYNBsvy" target="_blank" class="btn btn-discord">Discord</a>
         </div>
     </div>
 
-    <footer class="section-hidden">
-        <p>© 2026 hero684k | <a href="https://github.com/hero684k/MineCheck">GitHub</a> | MIT License</p>
-        <p style="font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.7;">Minecheck is not affiliated with Mojang or Microsoft.</p>
-    </footer>
+    <div class="feature-highlight section-hidden">
+        <div class="feature-content">
+            <span class="feature-tag">⚡ V3 НОВИНКА</span>
+            <h2 class="feature-title">AutoCheck: Умная автоматическая проверка</h2>
+            <p class="feature-desc">Эта функция сама проверит ключевые папки, проанализирует реестр и процессы, найдёт подозрительные файлы и признаки читов — и вынесет чёткий вердикт: <strong>«Чисто»</strong> или <strong>«Подозрение»</strong>. Не нужно ничего запускать вручную — просто нажмите одну кнопку.</p>
+            <a href="#" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;">Запустить AutoCheck →</a>
+        </div>
+        <div class="feature-icon-large"><img src="photos/AutoCheck.png" alt="AutoCheck preview"></div>
+    </div>
 
-    <script>
-        // Все скриншоты из папки photos
-        const screenshotFiles = [
-            'screenshotG1.png',
-            'screenshotG2.png',
-            'screenshotG3.png',
-            'screenshotW1.png',
-            'screenshotW2.png',
-            'screenshotW3.png'
-        ];
-        
-        let currentIndex = 0;
-        let screenshotCards = [];
-        
-        // Создаём скриншоты динамически
-        const screenshotsGrid = document.getElementById('screenshots-grid');
-        const indicatorsContainer = document.getElementById('screenshot-indicators');
-        
-        screenshotFiles.forEach((file, index) => {
-            const card = document.createElement('div');
-            card.className = 'screenshot-card';
-            if (index === 0) card.classList.add('active');
-            card.setAttribute('data-index', index);
-            card.innerHTML = `
-                <div class="screenshot-preview">
-                    <img src="photos/${file}" alt="Screenshot ${index + 1}">
-                </div>
-            `;
-            screenshotsGrid.appendChild(card);
-            
-            // Индикатор
-            const dot = document.createElement('div');
-            dot.className = 'indicator-dot';
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => showScreenshot(index));
-            indicatorsContainer.appendChild(dot);
-        });
-        
-        screenshotCards = document.querySelectorAll('.screenshot-card');
-        const indicatorDots = document.querySelectorAll('.indicator-dot');
-        
-        function showScreenshot(index) {
-            screenshotCards.forEach((card, i) => {
-                card.classList.toggle('active', i === index);
-            });
-            indicatorDots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-            currentIndex = index;
-        }
-        
-        const prevBtn = document.getElementById('screenshot-prev');
-        const nextBtn = document.getElementById('screenshot-next');
-        
-        prevBtn.addEventListener('click', () => {
-            let newIndex = currentIndex - 1;
-            if (newIndex < 0) newIndex = screenshotCards.length - 1;
-            showScreenshot(newIndex);
-        });
-        
-        nextBtn.addEventListener('click', () => {
-            let newIndex = currentIndex + 1;
-            if (newIndex >= screenshotCards.length) newIndex = 0;
-            showScreenshot(newIndex);
-        });
+    <div class="stats-grid section-hidden">
+        <div class="stat-card"><div class="stat-value" data-target="12">0</div><div class="stat-label">Инструментов</div></div>
+        <div class="stat-card"><div class="stat-value" data-target="1">0</div><div class="stat-label">.exe файл</div></div>
+        <div class="stat-card"><div class="stat-value" data-target="0">0</div><div class="stat-label">Зависимостей</div></div>
+        <div class="stat-card"><div class="stat-value">Portable</div><div class="stat-label">Режим работы</div></div>
+    </div>
 
-        // Particles
-        const particlesContainer = document.getElementById('particles');
-        const symbols = ['◻', '◼', '⬡', '◆', '•', '▸', '▪'];
-        function createParticle() {
-            const el = document.createElement('span');
-            el.className = 'particle';
-            el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-            el.style.left = Math.random() * 100 + '%';
-            el.style.fontSize = (Math.random() * 1.2 + 0.5) + 'rem';
-            el.style.animationDuration = (Math.random() * 8 + 6) + 's';
-            el.style.opacity = Math.random() * 0.3 + 0.1;
-            particlesContainer.appendChild(el);
-            el.addEventListener('animationend', () => el.remove());
-        }
-        for (let i = 0; i < 50; i++) createParticle();
-        setInterval(createParticle, 400);
+    <div class="section-header section-hidden"><h2 class="section-title">Встроенные инструменты</h2><div class="section-subtitle">Все утилиты уже внутри exe-файла</div></div>
+    <div class="tools-grid section-hidden">
+        <div class="tool-card"><div class="tool-icon">🔍</div><div class="tool-info"><h3>Auto-Scan <span class="badge-new">NEW</span></h3><p>Авто-сканер читов</p></div></div>
+        <div class="tool-card"><div class="tool-icon">🖥️</div><div class="tool-info"><h3>System Info <span class="badge-new">NEW</span></h3><p>Информация о ПК</p></div></div>
+        <div class="tool-card"><div class="tool-icon">📁</div><div class="tool-info"><h3>Everything</h3><p>Мгновенный поиск файлов</p></div></div>
+        <div class="tool-card"><div class="tool-icon">🛡️</div><div class="tool-info"><h3>ShellBag</h3><p>Анализ реестра</p></div></div>
+        <div class="tool-card"><div class="tool-icon">⏳</div><div class="tool-info"><h3>Prefetch</h3><p>История запуска программ</p></div></div>
+        <div class="tool-card"><div class="tool-icon">📃</div><div class="tool-info"><h3>Recent Files</h3><p>Недавние документы</p></div></div>
+        <div class="tool-card"><div class="tool-icon">🌐</div><div class="tool-info"><h3>Downloads</h3><p>История загрузок</p></div></div>
+        <div class="tool-card"><div class="tool-icon">📌</div><div class="tool-info"><h3>Jump Lists</h3><p>Быстрый доступ</p></div></div>
+        <div class="tool-card"><div class="tool-icon">⚡</div><div class="tool-info"><h3>Run History</h3><p>Журнал команд Win+R</p></div></div>
+        <div class="tool-card"><div class="tool-icon">💻</div><div class="tool-info"><h3>Processes</h3><p>Сканер процессов</p></div></div>
+        <div class="tool-card"><div class="tool-icon">🔌</div><div class="tool-info"><h3>USB History</h3><p>Логи USB-устройств</p></div></div>
+        <div class="tool-card"><div class="tool-icon">📝</div><div class="tool-info"><h3>UserAssist</h3><p>Статистика использования</p></div></div>
+    </div>
 
-        // Back to top
-        window.addEventListener('scroll', () => {
-            document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 300);
-        });
+    <div class="section-header section-hidden"><h2 class="section-title">Скриншоты</h2></div>
+    <div class="screenshot-viewer section-hidden">
+        <button id="screenshot-prev" class="screenshot-arrow">‹</button>
+        <div class="screenshots-grid" id="screenshots-grid"></div>
+        <button id="screenshot-next" class="screenshot-arrow">›</button>
+    </div>
+    <div class="screenshot-indicators" id="screenshot-indicators"></div>
 
-        // Section fade-in on scroll
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('section-visible');
-                    sectionObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.15 });
-        document.querySelectorAll('.section-hidden').forEach(el => sectionObserver.observe(el));
+    <div class="section-header section-hidden"><h2 class="section-title">Как начать</h2></div>
+    <div class="steps-container section-hidden">
+        <div class="step-item"><div class="step-number">1</div><div class="step-text"><h4>Скачайте архив</h4><p>Загрузите последнюю версию .ZIP файла</p></div></div>
+        <div class="step-item"><div class="step-number">2</div><div class="step-text"><h4>Распакуйте</h4><p>Извлеките файлы в любую удобную папку</p></div></div>
+        <div class="step-item"><div class="step-number">3</div><div class="step-text"><h4>Запустите Minecheck.exe</h4><p>Откройте программу и используйте AutoCheck или любой инструмент</p></div></div>
+    </div>
 
-        // Animated stats
-        const statObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('.stat-value[data-target]').forEach(counter => {
-                        const target = parseInt(counter.getAttribute('data-target'));
-                        let current = 0;
-                        const duration = 1000;
-                        const stepTime = 20;
-                        const steps = duration / stepTime;
-                        const increment = target / steps;
-                        const timer = setInterval(() => {
-                            current += increment;
-                            if (current >= target) {
-                                counter.textContent = target;
-                                clearInterval(timer);
-                            } else {
-                                counter.textContent = Math.floor(current);
-                            }
-                        }, stepTime);
-                    });
-                    statObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-        document.querySelectorAll('.stats-grid').forEach(el => statObserver.observe(el));
+    <div class="section-header section-hidden"><h2 class="section-title">Частые вопросы</h2></div>
+    <div class="faq-section section-hidden">
+        <details open><summary>Это безопасно? Антивирус может ругаться</summary><div class="faq-content">Да, это безопасно. Утилиты могут детектироваться как RiskTool из-за своего функционала (доступ к реестру и процессам). Это ложное срабатывание. Просто добавьте папку с программой в исключения антивируса.</div></details>
+        <details><summary>Нужен ли Python или другие библиотеки?</summary><div class="faq-content">Нет! Проект собран в один standalone .exe файл. Вам не нужно ничего устанавливать. Просто распакуйте архив и запустите.</div></details>
+        <details><summary>Работает ли на Windows 7?</summary><div class="faq-content">Мы рекомендуем Windows 10 или 11 для полной совместимости. На Windows 7 некоторые функции могут работать некорректно.</div></details>
+        <details><summary>Как добавить свои инструменты?</summary><div class="faq-content">Проект открыт под лицензией MIT. Вы можете скачать исходный код на GitHub и модифицировать его под свои нужды.</div></details>
+        <details><summary>Программа не запускается после скачивания</summary><div class="faq-content">1. Нажмите <strong>правой кнопкой</strong> на Minecheck.exe<br>2. Выберите <strong>"Свойства"</strong><br>3. Внизу нажмите кнопку <strong>"Разблокировать"</strong><br>4. Нажмите <strong>"ОК"</strong> и запустите программу<br><br>Или при запуске нажмите <strong>"Подробнее"</strong> → <strong>"Выполнить в любом случае"</strong>.</div></details>
+    </div>
 
-        // Download button effect
-        const downloadBtn = document.getElementById('downloadBtn');
-        const originalText = downloadBtn.innerHTML;
-        downloadBtn.addEventListener('click', () => {
-            downloadBtn.classList.add('loading');
-            downloadBtn.innerHTML = '⏳ Загрузка...';
-            setTimeout(() => {
-                downloadBtn.classList.remove('loading');
-                downloadBtn.innerHTML = originalText;
-            }, 2000);
-        });
+    <div class="share-section section-hidden"><button class="share-btn" id="copyLinkBtn">🔗 Поделиться ссылкой</button></div>
+</div>
 
-        // Copy link
-        const copyBtn = document.getElementById('copyLinkBtn');
-        function copyLink() {
-            navigator.clipboard.writeText('https://hero684k.github.io/MineCheck');
-            copyBtn.textContent = '✓ Ссылка скопирована!';
-            copyBtn.classList.add('copied');
-            setTimeout(() => {
-                copyBtn.textContent = '🔗 Поделиться ссылкой';
-                copyBtn.classList.remove('copied');
-            }, 2000);
-        }
-        copyBtn.addEventListener('click', copyLink);
-    </script>
+<footer class="section-hidden">
+    <p>© 2026 hero684k | <a href="https://github.com/hero684k/MineCheck">GitHub</a> | MIT License</p>
+    <p style="font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.7;">Minecheck is not affiliated with Mojang or Microsoft.</p>
+</footer>
+
+<script>
+    const screenshotFiles = ['screenshotG1.png','screenshotG2.png','screenshotG3.png','screenshotW1.png','screenshotW2.png','screenshotW3.png'];
+    let currentIndex = 0;
+    let screenshotCards = [];
+    const screenshotsGrid = document.getElementById('screenshots-grid');
+    const indicatorsContainer = document.getElementById('screenshot-indicators');
+    screenshotFiles.forEach((file, index) => {
+        const card = document.createElement('div');
+        card.className = 'screenshot-card';
+        if (index === 0) card.classList.add('active');
+        card.setAttribute('data-index', index);
+        card.innerHTML = `<div class="screenshot-preview"><img src="photos/${file}" alt="Screenshot ${index + 1}"></div>`;
+        screenshotsGrid.appendChild(card);
+        const dot = document.createElement('div');
+        dot.className = 'indicator-dot';
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => showScreenshot(index));
+        indicatorsContainer.appendChild(dot);
+    });
+    screenshotCards = document.querySelectorAll('.screenshot-card');
+    const indicatorDots = document.querySelectorAll('.indicator-dot');
+    function showScreenshot(index) { screenshotCards.forEach((card, i) => { card.classList.toggle('active', i === index); }); indicatorDots.forEach((dot, i) => { dot.classList.toggle('active', i === index); }); currentIndex = index; }
+    document.getElementById('screenshot-prev').addEventListener('click', () => { let newIndex = currentIndex - 1; if (newIndex < 0) newIndex = screenshotCards.length - 1; showScreenshot(newIndex); });
+    document.getElementById('screenshot-next').addEventListener('click', () => { let newIndex = currentIndex + 1; if (newIndex >= screenshotCards.length) newIndex = 0; showScreenshot(newIndex); });
+    const particlesContainer = document.getElementById('particles');
+    const symbols = ['◻','◼','⬡','◆','•','▸','▪'];
+    function createParticle() { const el = document.createElement('span'); el.className = 'particle'; el.textContent = symbols[Math.floor(Math.random() * symbols.length)]; el.style.left = Math.random() * 100 + '%'; el.style.fontSize = (Math.random() * 1.2 + 0.5) + 'rem'; el.style.animationDuration = (Math.random() * 8 + 6) + 's'; el.style.opacity = Math.random() * 0.3 + 0.1; particlesContainer.appendChild(el); el.addEventListener('animationend', () => el.remove()); }
+    for (let i = 0; i < 50; i++) createParticle();
+    setInterval(createParticle, 400);
+    window.addEventListener('scroll', () => { document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 300); });
+    const sectionObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('section-visible'); sectionObserver.unobserve(entry.target); } }); }, { threshold: 0.15 });
+    document.querySelectorAll('.section-hidden').forEach(el => sectionObserver.observe(el));
+    const statObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.querySelectorAll('.stat-value[data-target]').forEach(counter => { const target = parseInt(counter.getAttribute('data-target')); let current = 0; const duration = 1000; const stepTime = 20; const steps = duration / stepTime; const increment = target / steps; const timer = setInterval(() => { current += increment; if (current >= target) { counter.textContent = target; clearInterval(timer); } else { counter.textContent = Math.floor(current); } }, stepTime); }); statObserver.unobserve(entry.target); } }); }, { threshold: 0.3 });
+    document.querySelectorAll('.stats-grid').forEach(el => statObserver.observe(el));
+    const downloadBtn = document.getElementById('downloadBtn');
+    const originalText = downloadBtn.innerHTML;
+    downloadBtn.addEventListener('click', () => { downloadBtn.classList.add('loading'); downloadBtn.innerHTML = '⏳ Загрузка...'; setTimeout(() => { downloadBtn.classList.remove('loading'); downloadBtn.innerHTML = originalText; }, 2000); });
+    const copyBtn = document.getElementById('copyLinkBtn');
+    function copyLink() { navigator.clipboard.writeText('https://hero684k.github.io/MineCheck'); copyBtn.textContent = '✓ Ссылка скопирована!'; copyBtn.classList.add('copied'); setTimeout(() => { copyBtn.textContent = '🔗 Поделиться ссылкой'; copyBtn.classList.remove('copied'); }, 2000); }
+    copyBtn.addEventListener('click', copyLink);
+</script>
 </body>
 </html>
